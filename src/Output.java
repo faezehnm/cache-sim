@@ -1,6 +1,8 @@
 public class Output {
     private Cache cache ;
 
+    
+
     public void printInstructionFetchNum()
     {}
 
