@@ -67,6 +67,11 @@ public class Cache {
         return allocationPolicy;
     }
 
+    public void checkAddress(int state ,int address)
+    {
+
+    }
+
 }
 
 

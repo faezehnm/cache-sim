@@ -10,7 +10,9 @@ public class CommandParser {
         cache = new Cache();
         readFirstLine(scanner);
         readSecondLine(scanner);
-        readLine(scanner);
+        Output output = new Output(cache) ;
+        output.printCacheInfo();
+//        readLine(scanner);
     }
 
     private static void readLine(Scanner scanner)
@@ -46,34 +48,38 @@ public class CommandParser {
             loadStoreStates.add(state) ;
     }
 
-//    private static void setHardWareType()
-//    {
-//        if( loadStoreStates.contains(LoadStoreState.instructionLoad))
-//            cache.setArchitecture(ArchitectureType.harvard);
-//        else
-//            cache.setArchitecture(ArchitectureType.vonNeumann);
-//
-//    }
-
     private static void readFirstLine(Scanner scanner)
     {
        String line = scanner.nextLine();
        String[] arrOfStr = line.split(" - ");
-       cache.setBlockSize(Integer.valueOf(arrOfStr[0]));
+
        if( arrOfStr[1].equals("0") )
            cache.setArchitecture(ArchitectureType.vonNeumann);
-       else
+       else {
            cache.setArchitecture(ArchitectureType.harvard);
+           cache = new ICache();
+       }
+       cache.setBlockSize(Integer.valueOf(arrOfStr[0]));
        cache.setAssociativity(Integer.valueOf(arrOfStr[2]));
-       if( arrOfStr[3].equals("wb"))
-           cache.setWritePolicy(WritePolicy.writeBack);
-       else
-           cache.setWritePolicy(WritePolicy.writeTrough);
-       if (arrOfStr[4].equals("wa"))
-           cache.setWriteMissPolicy(AllocationPolicy.allocate);
-       else
-           cache.setWriteMissPolicy(AllocationPolicy.noAllocate);
+       setWritePolicy(arrOfStr[3]);
+       setAllocationPolicy(arrOfStr[4]);
 
+    }
+
+    private static void setWritePolicy(String writePolicy)
+    {
+        if( writePolicy.equals("wb"))
+            cache.setWritePolicy(WritePolicy.writeBack);
+        else
+            cache.setWritePolicy(WritePolicy.writeTrough);
+    }
+
+    private static void setAllocationPolicy(String allocationPolicy)
+    {
+        if (allocationPolicy.equals("wa"))
+            cache.setAllocationPolicy(AllocationPolicy.allocate);
+        else
+            cache.setAllocationPolicy(AllocationPolicy.noAllocate);
     }
 
     private static void readSecondLine(Scanner scanner)
@@ -84,11 +90,7 @@ public class CommandParser {
         if( arrOfStr.length==2 ){
             ICache iCache = (ICache)cache ;
             iCache.setiCacheSize(Integer.valueOf(arrOfStr[1]));
-            iCache.setArchitecture(ArchitectureType.harvard);
         }
-        else
-            cache.setArchitecture(ArchitectureType.vonNeumann);
-
 
     }
 }
