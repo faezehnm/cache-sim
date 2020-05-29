@@ -17,8 +17,8 @@ public class Output {
     {
         System.out.println("***CACHE SETTINGS***");
         printCacheSize();
-        System.out.println("Associativity: " + cache.getAssociativity());
-        System.out.println("Block size: " +cache.getBlockSize() );
+        System.out.println("Associativity: " + Cache.BaseInfo.associativity );
+        System.out.println("Block size: " + Cache.BaseInfo.blockSize );
         printWritePolicy();
         printAllocationPolicy();
         System.out.println();
@@ -29,18 +29,18 @@ public class Output {
         if( cache instanceof ICache){
             ICache iCache =(ICache)cache;
             System.out.println("Split I- D-cache");
-            System.out.println("I-cache size: " + iCache.getiCacheSize());
-            System.out.println("D-cache size: " + iCache.getdCacheSize());
+            System.out.println("I-cache size: " + iCache.iCacheSize);
+            System.out.println("D-cache size: " + iCache.dCacheSize);
         }
         else if ( cache instanceof Cache ){
             System.out.println("Unified I- D-cache");
-            System.out.println("Size : " + cache.getdCacheSize());
+            System.out.println("Size : " + cache.dCacheSize);
         }
     }
 
     private void printWritePolicy()
     {
-        if( cache.getWritePolicy().toString().equals("writeBack"))
+        if( Cache.BaseInfo.writePolicy.toString().equals("writeBack"))
             System.out.println("Write policy: WRITE BACK");
         else
             System.out.println("Write policy: WRITE THROUGH");
@@ -48,7 +48,7 @@ public class Output {
 
     private void printAllocationPolicy()
     {
-        if( cache.getAllocationPolicy().toString().equals("allocate"))
+        if( Cache.BaseInfo.allocationPolicy.toString().equals("allocate"))
             System.out.println("Allocation policy: WRITE ALLOCATE");
         else
             System.out.println("Allocation policy: WRITE NO ALLOCATE");
@@ -84,18 +84,18 @@ public class Output {
     private void printData()
     {
         System.out.println("DATA");
-        System.out.println("accesses: " + cache.getDataStatistics().getAccess());
-        System.out.println("misses: " + cache.getDataStatistics().getMisses());
-        System.out.println("miss rate: " + cache.getDataStatistics().getHitRate());
-        System.out.println("replace: " + cache.getDataStatistics().getReplaceNum());
+        System.out.println("accesses: " + cache.dataStatistics.getAccess());
+        System.out.println("misses: " + cache.dataStatistics.getMisses());
+        System.out.println("miss rate: " + cache.dataStatistics.getHitRate());
+        System.out.println("replace: " + cache.dataStatistics.getReplaceNum());
 
     }
 
     private void printTraffic()
     {
         System.out.println("TRAFFIC (in worlds)");
-        System.out.println("demand fetch: " + cache.getDataStatistics().getDemandFetch() );
-        System.out.println("copies back: " +cache.getDataStatistics().getCopiesBack() );
+        System.out.println("demand fetch: " + cache.dataStatistics.getDemandFetch() );
+        System.out.println("copies back: " +cache.dataStatistics.getCopiesBack() );
     }
 
 }

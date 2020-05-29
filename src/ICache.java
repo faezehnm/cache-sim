@@ -1,17 +1,14 @@
 import java.util.HashMap;
 
 public class ICache extends Cache {
-    private int iCacheSize ;
+    protected static int iCacheSize ;
     private CacheStatistics instructionStatistics;
-    private HashMap<Integer ,Set> dSets ;
+    protected static HashMap<Integer ,Set> dSets ;
 
     public void setiCacheSize(int iCacheSize) {
         this.iCacheSize = iCacheSize;
     }
 
-    public int getiCacheSize() {
-        return iCacheSize;
-    }
 
     public CacheStatistics getInstructionStatistics() {
         return instructionStatistics;
@@ -26,8 +23,8 @@ public class ICache extends Cache {
     @Override
     public void buildCache() {
         super.buildCache();
-        for( int  i=0 ; i< iCacheSize/blockSize ; i++){
-            dSets.put(i ,new Set(associativity,blockSize)) ;
+        for( int  i=0 ; i< iCacheSize/BaseInfo.blockSize ; i++){
+            dSets.put(i ,new Set(BaseInfo.associativity,BaseInfo.blockSize)) ;
         }
     }
 

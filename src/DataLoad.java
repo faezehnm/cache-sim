@@ -6,7 +6,7 @@ public class DataLoad {
         this.cache = cache ;
     }
 
-    public void loadData(int address)
+    public static void loadData(int address)
     {}
 
 }

@@ -11,11 +11,11 @@ public class CommandParser {
         cache = new Cache();
         readFirstLine(scanner);
         readSecondLine(scanner);
-        Output output = new Output(cache) ;
-        output.printCacheInfo();
-//        cache.buildCache();
-//        readOrders(scanner);
-////        cache.cleanUpCache();
+//        Output output = new Output(cache) ;
+//        output.printCacheInfo();
+        cache.buildCache();
+        readOrders(scanner);
+//        cache.cleanUpCache();
     }
 
     private static void readOrders(Scanner scanner)
@@ -62,8 +62,8 @@ public class CommandParser {
        String[] arrOfStr = line.split(" - ");
 
        setArchitecture(arrOfStr[1]);
-       cache.setBlockSize(Integer.valueOf(arrOfStr[0]));
-       cache.setAssociativity(Integer.valueOf(arrOfStr[2]));
+       Cache.BaseInfo.blockSize =(Integer.valueOf(arrOfStr[0]));
+       Cache.BaseInfo.associativity =(Integer.valueOf(arrOfStr[2]));
        setWritePolicy(arrOfStr[3]);
        setAllocationPolicy(arrOfStr[4]);
     }
@@ -71,9 +71,9 @@ public class CommandParser {
     private static void setArchitecture(String architecture)
     {
         if( architecture.equals("0") )
-            cache.setArchitecture(ArchitectureType.vonNeumann);
+            Cache.BaseInfo.architecture = (ArchitectureType.vonNeumann);
         else {
-            cache.setArchitecture(ArchitectureType.harvard);
+            Cache.BaseInfo.architecture = (ArchitectureType.harvard);
             cache = new ICache();
         }
     }
@@ -81,27 +81,27 @@ public class CommandParser {
     private static void setWritePolicy(String writePolicy)
     {
         if( writePolicy.equals("wb"))
-            cache.setWritePolicy(WritePolicy.writeBack);
+            Cache.BaseInfo.writePolicy = (WritePolicy.writeBack);
         else
-            cache.setWritePolicy(WritePolicy.writeTrough);
+            Cache.BaseInfo.writePolicy =(WritePolicy.writeTrough);
     }
 
     private static void setAllocationPolicy(String allocationPolicy)
     {
         if (allocationPolicy.equals("wa"))
-            cache.setAllocationPolicy(AllocationPolicy.allocate);
+            Cache.BaseInfo.allocationPolicy =(AllocationPolicy.allocate);
         else
-            cache.setAllocationPolicy(AllocationPolicy.noAllocate);
+            Cache.BaseInfo.allocationPolicy =(AllocationPolicy.noAllocate);
     }
 
     private static void readSecondLine(Scanner scanner)
     {
         String line = scanner.nextLine();
         String[] arrOfStr = line.split(" - ");
-        cache.setdCacheSize(Integer.valueOf(arrOfStr[0]));
+        cache.dCacheSize = (Integer.valueOf(arrOfStr[0]));
         if( arrOfStr.length==2 ){
             ICache iCache = (ICache)cache ;
-            iCache.setiCacheSize(Integer.valueOf(arrOfStr[1]));
+            iCache.iCacheSize = (Integer.valueOf(arrOfStr[1]));
         }
 
     }

@@ -4,79 +4,33 @@ import java.util.LinkedList;
 
 public class Cache {
 
-    protected int blockSize ;
-    protected ArchitectureType architecture ;
-    protected int associativity;
-    protected WritePolicy writePolicy ;
-    protected AllocationPolicy allocationPolicy;
+    protected static CacheStatistics dataStatistics ;
     protected HashMap<Integer ,Set> dSets ;
-    protected int dCacheSize ;
-    protected CacheStatistics dataStatistics ;
-    protected DataStore dataStore ;
-    protected DataLoad dataLoad ;
+    protected static int dCacheSize ;
 
+    protected static class BaseInfo
+    {
+        protected static int blockSize ;
+        protected static ArchitectureType architecture ;
+        protected static int associativity;
+        protected static WritePolicy writePolicy ;
+        protected static AllocationPolicy allocationPolicy;
 
-    public void setArchitecture(ArchitectureType architecture) {
-        this.architecture = architecture;
     }
 
-    public void setBlockSize(int blockSize) {
-        this.blockSize = blockSize;
-    }
-
-    public void setAssociativity(int associativity) {
-        this.associativity = associativity;
-    }
-
-    public void setWritePolicy(WritePolicy writePolicy) {
-        this.writePolicy = writePolicy;
-    }
-
-    public void setdCacheSize(int dCacheSize) {
-        this.dCacheSize = dCacheSize;
-    }
-
-    public void setAllocationPolicy(AllocationPolicy allocationPolicy) {
-        this.allocationPolicy = allocationPolicy;
-    }
-
-    public int getBlockSize() {
-        return blockSize;
-    }
-
-    public ArchitectureType getArchitecture() {
-        return architecture;
-    }
-
-    public int getAssociativity() {
-        return associativity;
-    }
-
-    public WritePolicy getWritePolicy() {
-        return writePolicy;
+    public static void setdCacheSize(int dCacheSize) {
+        Cache.dCacheSize = dCacheSize;
     }
 
     public HashMap<Integer, Set> getdSets() {
         return dSets;
     }
 
-    public int getdCacheSize() {
-        return dCacheSize;
-    }
-
-    public AllocationPolicy getAllocationPolicy() {
-        return allocationPolicy;
-    }
-
-    public CacheStatistics getDataStatistics() {
-        return dataStatistics;
-    }
-
     public void buildCache()
     {
         dSets = new HashMap<>();
-        for( int  i=0 ; i< dCacheSize/blockSize ; i++){
-            dSets.put(i ,new Set(associativity,blockSize)) ;
+        for( int  i=0 ; i< dCacheSize/BaseInfo.blockSize ; i++){
+            dSets.put(i ,new Set(BaseInfo.associativity,BaseInfo.blockSize)) ;
         }
 //        System.out.println(dSets);
     }
@@ -85,12 +39,10 @@ public class Cache {
     {
         switch (state.toString()){
             case "dataLoad" :
-                dataLoad = new DataLoad(this) ;
-                dataLoad.loadData(address);
+                DataLoad.loadData(address);
                 break;
             case "dataStore" :
-                dataStore = new DataStore(this);
-                dataStore.storeData(address);
+                DataStore.storeData(address);
                 break;
         }
 
