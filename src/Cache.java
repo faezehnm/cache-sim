@@ -1,3 +1,4 @@
+import javax.jws.soap.SOAPBinding;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -67,9 +68,9 @@ public class Cache {
         return allocationPolicy;
     }
 
-    public void checkAddress(int state ,int address)
+    public void doOrder(LoadStoreState state ,int address)
     {
-
+        System.out.println(state +"     " + address);
     }
 
 }

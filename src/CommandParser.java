@@ -5,43 +5,44 @@ public class CommandParser {
     private static ArrayList<LoadStoreState> loadStoreStates;
     private static Cache cache ;
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         Scanner scanner = new Scanner(System.in);
         cache = new Cache();
-        readFirstLine(scanner);
-        readSecondLine(scanner);
-        Output output = new Output(cache) ;
-        output.printCacheInfo();
-//        readLine(scanner);
+//        readFirstLine(scanner);
+//        readSecondLine(scanner);
+////        Output output = new Output(cache) ;
+////        output.printCacheInfo();
+        readOrders(scanner);
     }
 
-    private static void readLine(Scanner scanner)
+    private static void readOrders(Scanner scanner)
     {
-        readState(scanner);
-        readMemmoryAddress(scanner);
+        String line = null ;
+        while( !(line =scanner.nextLine()).isEmpty()){
+            String[] arrOfStr = line.split("\\s+");
+            cache.doOrder(readState(Integer.valueOf(arrOfStr[0])), Integer.valueOf(arrOfStr[1]));
+        }
+
     }
 
-    private static void readState(Scanner scanner)
+    private static LoadStoreState readState(int state)
     {
-        int state = scanner.nextInt();
+        LoadStoreState res = null;
         switch (state) {
             case 0:
-                addLoadStoreState(LoadStoreState.dataLoad);
+                res = LoadStoreState.dataLoad;
                 break;
             case 1:
-                addLoadStoreState(LoadStoreState.dataStore);
+                res = LoadStoreState.dataStore;
                 break;
             case 2:
-                addLoadStoreState(LoadStoreState.instructionLoad);
+                res = LoadStoreState.instructionLoad;
                 break;
         }
+        return res;
     }
 
-    private static void readMemmoryAddress(Scanner scanner)
-    {
-        int memAddress = scanner.nextInt() ;
-
-    }
     private static void addLoadStoreState(LoadStoreState state)
     {
         if( !loadStoreStates.contains(state))
@@ -53,17 +54,21 @@ public class CommandParser {
        String line = scanner.nextLine();
        String[] arrOfStr = line.split(" - ");
 
-       if( arrOfStr[1].equals("0") )
-           cache.setArchitecture(ArchitectureType.vonNeumann);
-       else {
-           cache.setArchitecture(ArchitectureType.harvard);
-           cache = new ICache();
-       }
+       setArchitecture(arrOfStr[1]);
        cache.setBlockSize(Integer.valueOf(arrOfStr[0]));
        cache.setAssociativity(Integer.valueOf(arrOfStr[2]));
        setWritePolicy(arrOfStr[3]);
        setAllocationPolicy(arrOfStr[4]);
+    }
 
+    private static void setArchitecture(String architecture)
+    {
+        if( architecture.equals("0") )
+            cache.setArchitecture(ArchitectureType.vonNeumann);
+        else {
+            cache.setArchitecture(ArchitectureType.harvard);
+            cache = new ICache();
+        }
     }
 
     private static void setWritePolicy(String writePolicy)
