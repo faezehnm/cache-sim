@@ -11,11 +11,11 @@ public class CommandParser {
         cache = new Cache();
         readFirstLine(scanner);
         readSecondLine(scanner);
-//        Output output = new Output(cache) ;
-//        output.printCacheInfo();
-        cache.buildCache();
-        readOrders(scanner);
-//        cache.cleanUpCache();
+        Output output = new Output(cache) ;
+        output.printCacheInfo();
+//        cache.buildCache();
+//        readOrders(scanner);
+////        cache.cleanUpCache();
     }
 
     private static void readOrders(Scanner scanner)
@@ -23,7 +23,12 @@ public class CommandParser {
         String line = null ;
         while( !(line =scanner.nextLine()).isEmpty()){
             String[] arrOfStr = line.split("\\s+");
-            cache.doOrder(readState(Integer.valueOf(arrOfStr[0])), Integer.valueOf(arrOfStr[1]));
+            if(arrOfStr[0].equals("instructionLoad")){
+                ICache iCache = (ICache) cache;
+                iCache.fetchInstruction(Integer.valueOf(arrOfStr[1]));
+            }
+            else
+                cache.doOrder(readState(Integer.valueOf(arrOfStr[0])), Integer.valueOf(arrOfStr[1]));
         }
 
     }
