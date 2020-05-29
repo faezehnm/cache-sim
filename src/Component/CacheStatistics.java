@@ -1,3 +1,5 @@
+package Component;
+
 public class CacheStatistics {
     private long access ;
     private long misses ;

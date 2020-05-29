@@ -1,3 +1,8 @@
+import Component.ICache;
+import Enums.ArchitectureType;
+import Enums.LoadStoreState;
+import Enums.WritePolicy;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 

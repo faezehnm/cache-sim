@@ -1,11 +1,15 @@
+package Component;
+
 import java.util.LinkedList;
 
 public class Set {
+
     private int blocksNum ;
     private int blockSize ;
     private LinkedList<Block> blocks ;
 
-    public Set(int blocksNum , int blockSize){
+    public Set(int blocksNum , int blockSize)
+    {
         this.blocksNum = blocksNum ;
         this.blockSize = blockSize ;
         blocks = new LinkedList<>();
@@ -26,7 +30,6 @@ public class Set {
     {
         blocks.remove(block);
         addBlock(block);
-
     }
 
     public void replaceBlock(Block block)
@@ -34,4 +37,5 @@ public class Set {
         blocks.removeLast();
         addBlock(block);
     }
+
 }

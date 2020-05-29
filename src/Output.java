@@ -1,3 +1,5 @@
+import Component.ICache;
+
 public class Output {
     private Cache cache ;
 
@@ -67,10 +69,10 @@ public class Output {
         if( cache instanceof ICache ) {
             ICache iCache = (ICache) cache;
             System.out.println("INSTRUCTIONS");
-            System.out.println("accesses: " + iCache.getInstructionStatistics().getAccess());
-            System.out.println("misses: " + iCache.getInstructionStatistics().getMisses());
-            System.out.println("miss rate: " + iCache.getInstructionStatistics().getMissRate() + "(hit rate " +iCache.getInstructionStatistics().getHitRate() + ")");
-            System.out.println("replace: " + iCache.getInstructionStatistics().getReplaceNum());
+            System.out.println("accesses: " + iCache.instructionStatistics.getAccess());
+            System.out.println("misses: " + iCache.instructionStatistics.getMisses());
+            System.out.println("miss rate: " + iCache.instructionStatistics.getMissRate() + "(hit rate " +iCache.instructionStatistics.getHitRate() + ")");
+            System.out.println("replace: " + iCache.instructionStatistics.getReplaceNum());
         }
         else {
             System.out.println("DATA");

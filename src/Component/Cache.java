@@ -1,29 +1,29 @@
+package Component;
+import Enums.AllocationPolicy;
+import Enums.ArchitectureType;
+import Enums.LoadStoreState;
+import Enums.WritePolicy;
+import Operations.DataLoad;
+import Operations.DataStore;
+
 import javax.jws.soap.SOAPBinding;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Cache {
 
-    protected static CacheStatistics dataStatistics ;
-    protected HashMap<Integer ,Set> dSets ;
+    public static CacheStatistics dataStatistics ;
+    protected static HashMap<Integer ,Set> dSets ;
     protected static int dCacheSize ;
 
-    protected static class BaseInfo
+    public static class BaseInfo
     {
-        protected static int blockSize ;
-        protected static ArchitectureType architecture ;
-        protected static int associativity;
-        protected static WritePolicy writePolicy ;
-        protected static AllocationPolicy allocationPolicy;
-
-    }
-
-    public static void setdCacheSize(int dCacheSize) {
-        Cache.dCacheSize = dCacheSize;
-    }
-
-    public HashMap<Integer, Set> getdSets() {
-        return dSets;
+        public static int blockSize ;
+        public static ArchitectureType architecture ;
+        public static int associativity;
+        public static WritePolicy writePolicy ;
+        public static AllocationPolicy allocationPolicy;
     }
 
     public void buildCache()
@@ -35,7 +35,7 @@ public class Cache {
 //        System.out.println(dSets);
     }
 
-    public void doOrder(LoadStoreState state ,int address)
+    public void doOrder(LoadStoreState state , int address)
     {
         switch (state.toString()){
             case "dataLoad" :
@@ -47,7 +47,6 @@ public class Cache {
         }
 
     }
-
 
     //TODO : complete
     public void cleanUpCache()

@@ -1,3 +1,6 @@
+package Operations;
+import Component.Cache;
+
 public class DataLoad {
     private Cache cache ;
 

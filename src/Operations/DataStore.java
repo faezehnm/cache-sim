@@ -1,3 +1,7 @@
+package Operations;
+
+import Component.Cache;
+
 public class DataStore {
 
     public static void storeData(int address)
