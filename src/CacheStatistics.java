@@ -40,9 +40,9 @@ public class CacheStatistics {
         demandFetch++;
     }
 
-    public void increaseCopiesBack()
+    public void increaseCopiesBack(int toIncrease)
     {
-        copiesBack++;
+        copiesBack += toIncrease;
     }
 
     public void calculateMissRate()
@@ -67,14 +67,16 @@ public class CacheStatistics {
         return hits;
     }
 
-    public float getMissRate() {
+    public double getMissRate() {
         calculateMissRate();
-        return missRate;
+        double valueRounded = Math.round(missRate * 10000D) / 10000D;
+        return valueRounded;
     }
 
-    public float getHitRate() {
+    public double getHitRate() {
         calculateHitRate();
-        return hitRate;
+        double valueRounded = Math.round(missRate * 10000D) / 10000D;
+        return valueRounded;
     }
 
     public long getReplaceNum() {

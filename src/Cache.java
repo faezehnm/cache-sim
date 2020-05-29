@@ -102,13 +102,110 @@ public class Cache {
 
     private void storeData(int address)
     {
+        if( writePolicy.toString().equals("writeTrough") && allocationPolicy.toString().equals("allocate") )
+            WTvsWA(address);
+        else if(writePolicy.toString().equals("writeTrough") && allocationPolicy.toString().equals("noAllocate") )
+            WTvsWN(address);
+        else if( writePolicy.toString().equals("writeBack") && allocationPolicy.toString().equals("allocate") )
+            WBvsWA(address);
+        else if( writePolicy.toString().equals("writeBack") && allocationPolicy.toString().equals("noAllocate") )
+            WBvsWN(address);
 
+    }
+    private void WTvsWA(int address)
+    {
+        dataStatistics.increaseCopiesBack(1);
+        if( isInCache(address)){
+            dataStatistics.increaseHit();
+            writeWordInCache(address);
+        }
+        else{
+            dataStatistics.increaseMiss();
+            writeBlockInCache(address);
+        }
+    }
+
+    private void WTvsWN(int address)
+    {
+        dataStatistics.increaseCopiesBack(1);
+        if( isInCache(address)){
+            dataStatistics.increaseHit();
+            writeWordInCache(address);
+        }
+        else{
+            dataStatistics.increaseMiss();
+        }
+    }
+
+    private void WBvsWA(int address)
+    {
+        setDirtyBlock(address);
+        if( isInCache(address)) {
+            dataStatistics.increaseHit();
+        }
+        else{
+            dataStatistics.increaseMiss();
+            writeBlockInCache(address);
+        }
+
+    }
+
+    private void WBvsWN(int address){
+        if( isInCache(address)) {
+            dataStatistics.increaseHit();
+            setDirtyBlock(address);
+        }
+        else{
+            dataStatistics.increaseMiss();
+            dataStatistics.increaseCopiesBack(1);
+        }
+    }
+    //TODO : complete
+    private void setDirtyBlock(int address)
+    {
+
+    }
+
+    //TODO : complete
+    private boolean isInCache(int address)
+    {
+        return false;
+    }
+    //TODO : complete
+    private void writeBlockInCache(int address)
+    {
+
+    }
+    //TODO : complete
+    private void writeWordInCache(int address)
+    {
+
+    }
+
+
+    //TODO : complete
+    private void expulsionBlock(int address)
+    {
+        dataStatistics.increaseCopiesBack(blockSize/4);
+    }
+
+    //TODO : complete
+    public void cleanUpCache()
+    {
+        /*
+        check all dirty bit & if that block was dirty expulsion from cache
+        use method expulsionBlock
+         */
     }
 
     private void fetchInstruction(int address)
     {
 
     }
+
+
+
+
 
 }
 
