@@ -1,4 +1,6 @@
+import Component.Cache;
 import Component.ICache;
+import Enums.AllocationPolicy;
 import Enums.ArchitectureType;
 import Enums.LoadStoreState;
 import Enums.WritePolicy;
@@ -16,10 +18,10 @@ public class CommandParser {
         cache = new Cache();
         readFirstLine(scanner);
         readSecondLine(scanner);
-//        Output output = new Output(cache) ;
-//        output.printCacheInfo();
+        Output output = new Output(cache) ;
+        output.printCacheInfo();
         cache.buildCache();
-        readOrders(scanner);
+//        readOrders(scanner);
 //        cache.cleanUpCache();
     }
 

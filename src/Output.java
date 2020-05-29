@@ -1,3 +1,4 @@
+import Component.Cache;
 import Component.ICache;
 
 public class Output {
@@ -8,10 +9,11 @@ public class Output {
         this.cache = cache ;
     }
 
+
 //    public void printOutput()
 //    {
 //        printCacheInfo();
-//        printCacheStatistics();
+//        printStatistics();
 //    }
 
 
@@ -56,7 +58,7 @@ public class Output {
             System.out.println("Allocation policy: WRITE NO ALLOCATE");
     }
 
-    private void printCacheStatistics()
+    private void printStatistics()
     {
         System.out.println("***CACHE STATISTICS***");
         printInstructions();

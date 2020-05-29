@@ -20,4 +20,19 @@ public class Block {
         dirtyBit = 0 ;
     }
 
+    public int getValidBit() {
+        return validBit;
+    }
+
+    public void setValidBit(int validBit) {
+        this.validBit = validBit;
+    }
+
+    public int getDirtyBit() {
+        return dirtyBit;
+    }
+
+    public void setDirtyBit(int dirtyBit) {
+        this.dirtyBit = dirtyBit;
+    }
 }

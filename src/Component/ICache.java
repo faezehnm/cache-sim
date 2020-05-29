@@ -3,15 +3,15 @@ package Component;
 import java.util.HashMap;
 
 public class ICache extends Cache {
-    protected static int iCacheSize ;
-    protected static CacheStatistics instructionStatistics;
+    public static int iCacheSize ;
+    public static Statistics instructionStatistics;
     protected static HashMap<Integer ,Set> dSets ;
 
     @Override
     public void buildCache() {
         super.buildCache();
         for( int  i=0 ; i< iCacheSize/BaseInfo.blockSize ; i++){
-            dSets.put(i ,new Set(BaseInfo.associativity,BaseInfo.blockSize)) ;
+            dSets.put(i ,new Set(BaseInfo.associativity)) ;
         }
     }
 
