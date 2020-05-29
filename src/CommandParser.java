@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Scanner;
 
 public class CommandParser {
@@ -71,9 +70,9 @@ public class CommandParser {
        else
            cache.setWritePolicy(WritePolicy.writeTrough);
        if (arrOfStr[4].equals("wa"))
-           cache.setWriteMissPolicy(WriteMissPolicy.allocate);
+           cache.setWriteMissPolicy(AllocationPolicy.allocate);
        else
-           cache.setWriteMissPolicy(WriteMissPolicy.noAllocate);
+           cache.setWriteMissPolicy(AllocationPolicy.noAllocate);
 
     }
 

@@ -5,4 +5,7 @@ public class ICache extends Cache {
         this.iCacheSize = iCacheSize;
     }
 
+    public int getiCacheSize() {
+        return iCacheSize;
+    }
 }
