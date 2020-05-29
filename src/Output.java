@@ -54,48 +54,48 @@ public class Output {
             System.out.println("Allocation policy: WRITE NO ALLOCATE");
     }
 
-//    private void printCacheStatistics()
-//    {
-//        System.out.println("***CACHE STATISTICS***");
-//        printInstructions();
-//        printData();
-//        printTraffic();
-//    }
+    private void printCacheStatistics()
+    {
+        System.out.println("***CACHE STATISTICS***");
+        printInstructions();
+        printData();
+        printTraffic();
+    }
 
-//    private void printInstructions()
-//    {
-//        if( cache instanceof ICache ) {
-//            ICache iCache = (ICache) cache;
-//            System.out.println("INSTRUCTIONS");
-//            System.out.println("accesses: " +);
-//            System.out.println("misses: " +);
-//            System.out.println("miss rate: " + + "(hit rate " + + ")");
-//            System.out.println("data: " +);
-//        }
-//        else {
-//            System.out.println("INSTRUCTIONS");
-//            System.out.println("accesses: " + 0);
-//            System.out.println("misses: " + 0);
-//            System.out.println("miss rate: " + "0.0000 " + "(hit rate 0.0000)");
-//            System.out.println("data: " + 0);
-//        }
-//    }
-//
-//    private void printData()
-//    {
-//        System.out.println("DATA");
-//        System.out.println("accesses: " + );
-//        System.out.println("misses: " + );
-//        System.out.println("miss rate: " +);
-//        System.out.println("data: " +);
-//
-//    }
-//
-//    private void printTraffic()
-//    {
-//        System.out.println("TRAFFIC (in worlds)");
-//        System.out.println("demand fetch: " + );
-//        System.out.println("copies back: " + );
-//    }
+    private void printInstructions()
+    {
+        if( cache instanceof ICache ) {
+            ICache iCache = (ICache) cache;
+            System.out.println("INSTRUCTIONS");
+            System.out.println("accesses: " + iCache.getInstructionStatistics().getAccess());
+            System.out.println("misses: " + iCache.getInstructionStatistics().getMisses());
+            System.out.println("miss rate: " + iCache.getInstructionStatistics().getMissRate() + "(hit rate " +iCache.getInstructionStatistics().getHitRate() + ")");
+            System.out.println("replace: " + iCache.getInstructionStatistics().getReplaceNum());
+        }
+        else {
+            System.out.println("DATA");
+            System.out.println("accesses: " + 0);
+            System.out.println("misses: " + 0);
+            System.out.println("miss rate: " + "0.0000 " + "(hit rate 0.0000)");
+            System.out.println("replace: " + 0);
+        }
+    }
+
+    private void printData()
+    {
+        System.out.println("DATA");
+        System.out.println("accesses: " + cache.getDataStatistics().getAccess());
+        System.out.println("misses: " + cache.getDataStatistics().getMisses());
+        System.out.println("miss rate: " + cache.getDataStatistics().getHitRate());
+        System.out.println("replace: " + cache.getDataStatistics().getReplaceNum());
+
+    }
+
+    private void printTraffic()
+    {
+        System.out.println("TRAFFIC (in worlds)");
+        System.out.println("demand fetch: " + cache.getDataStatistics().getDemandFetch() );
+        System.out.println("copies back: " +cache.getDataStatistics().getCopiesBack() );
+    }
 
 }

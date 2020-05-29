@@ -9,8 +9,10 @@ public class Cache {
     private int associativity;
     private WritePolicy writePolicy ;
     private AllocationPolicy allocationPolicy;
-    private HashMap<Integer , LinkedList<String>> sets ;
+    private HashMap<Integer , LinkedList<Block>> sets ;
     private int dCacheSize ;
+    private CacheStatistics dataStatistics ;
+
 
     public void setArchitecture(ArchitectureType architecture) {
         this.architecture = architecture;
@@ -26,10 +28,6 @@ public class Cache {
 
     public void setWritePolicy(WritePolicy writePolicy) {
         this.writePolicy = writePolicy;
-    }
-
-    public void setSets(HashMap<Integer, LinkedList<String>> sets) {
-        this.sets = sets;
     }
 
     public void setdCacheSize(int dCacheSize) {
@@ -56,7 +54,7 @@ public class Cache {
         return writePolicy;
     }
 
-    public HashMap<Integer, LinkedList<String>> getSets() {
+    public HashMap<Integer, LinkedList<Block>> getSets() {
         return sets;
     }
 
@@ -68,9 +66,48 @@ public class Cache {
         return allocationPolicy;
     }
 
+    public CacheStatistics getDataStatistics() {
+        return dataStatistics;
+    }
+
+    public void buildCache()
+    {
+        sets = new HashMap<>();
+        for( int  i=0 ; i<blockSize/associativity ; i++){
+            sets.put(i ,new LinkedList<Block>()) ;
+        }
+//        System.out.println(sets);
+    }
+
     public void doOrder(LoadStoreState state ,int address)
     {
-        System.out.println(state +"     " + address);
+        switch (state.toString()){
+            case "dataLoad" :
+                loadData(address);
+                break;
+            case "dataStore" :
+                storeData(address);
+                break;
+            case "instructionLoad" :
+                fetchInstruction(address);
+                break;
+        }
+
+    }
+
+    private void loadData(int address)
+    {
+
+    }
+
+    private void storeData(int address)
+    {
+
+    }
+
+    private void fetchInstruction(int address)
+    {
+
     }
 
 }
