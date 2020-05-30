@@ -8,8 +8,10 @@ public class ICache extends Cache {
     protected static HashMap<Integer ,Set> dSets ;
 
     @Override
-    public void buildCache() {
+    public void buildCache()
+    {
         super.buildCache();
+        dSets = new HashMap<>();
         for( int  i=0 ; i< iCacheSize/BaseInfo.blockSize ; i++){
             dSets.put(i ,new Set(BaseInfo.associativity)) ;
         }
@@ -19,7 +21,7 @@ public class ICache extends Cache {
     //TODO : complete
     public void fetchInstruction(int address)
     {
-
+        System.out.println("instructionLoad");
     }
 
 

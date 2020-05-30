@@ -4,16 +4,97 @@ import Component.Cache;
 
 public class DataStore {
 
-    public static void storeData(int address)
+    static class WriteState
+    {
+        protected static void WTvsWA(String address)
+        {
+            Cache.dataStatistics.increaseCopiesBack(1);
+            if( isDataInCache(address)){
+                Cache.dataStatistics.increaseHit();
+                MangeCache.writeWordInCache(address);
+            }
+            else{
+                Cache.dataStatistics.increaseMiss();
+                MangeCache.writeBlockInCache(address);
+            }
+        }
+
+        protected static void WTvsWN(String address)
+        {
+            Cache.dataStatistics.increaseCopiesBack(1);
+            if( isDataInCache(address)){
+                Cache.dataStatistics.increaseHit();
+                MangeCache.writeWordInCache(address);
+            }
+            else{
+                Cache.dataStatistics.increaseMiss();
+            }
+        }
+
+        protected static void WBvsWA(String address)
+        {
+            MangeCache.setDirtyBlock(address);
+            if( isDataInCache(address)) {
+                Cache.dataStatistics.increaseHit();
+            }
+            else{
+                Cache.dataStatistics.increaseMiss();
+                MangeCache.writeBlockInCache(address);
+            }
+
+        }
+
+        protected static void WBvsWN(String address)
+        {
+            if( isDataInCache(address)) {
+                Cache.dataStatistics.increaseHit();
+                MangeCache.setDirtyBlock(address);
+            }
+            else{
+                Cache.dataStatistics.increaseMiss();
+                Cache.dataStatistics.increaseCopiesBack(1);
+            }
+        }
+    }
+
+    static class MangeCache
+    {
+        //TODO : complete
+        private static void writeBlockInCache(String address)
+        {
+
+        }
+
+
+        //TODO : complete
+        private static void writeWordInCache(String address)
+        {
+
+        }
+
+        //TODO : complete
+        private void expulsionBlock(String address)
+        {
+            Cache.dataStatistics.increaseCopiesBack(Cache.BaseInfo.blockSize/4);
+        }
+
+        //TODO : complete
+        private static void setDirtyBlock(String address)
+        {
+
+        }
+    }
+
+    public static void storeData(String address)
     {
         switch (Cache.BaseInfo.writePolicy.toString()){
             case "writeTrough" :
                 switch (Cache.BaseInfo.allocationPolicy.toString()){
                     case "allocate" :
-                        WTvsWA(address);
+                        WriteState.WTvsWA(address);
                         break;
                     case "noAllocate" :
-                        WTvsWN(address);
+                        WriteState.WTvsWN(address);
                         break;
                 }
                 break;
@@ -21,10 +102,10 @@ public class DataStore {
             case "writeBack" :
                 switch (Cache.BaseInfo.allocationPolicy.toString()){
                     case "allocate" :
-                        WBvsWA(address);
+                        WriteState.WBvsWA(address);
                         break;
                     case "noAllocate" :
-                        WBvsWN(address);
+                        WriteState.WBvsWN(address);
                         break;
                 }
                 break;
@@ -32,86 +113,11 @@ public class DataStore {
 
     }
 
-    private static void WTvsWA(int address)
+    private static boolean isDataInCache(String address)
     {
-        Cache.dataStatistics.increaseCopiesBack(1);
-        if( isInCache(address)){
-            Cache.dataStatistics.increaseHit();
-            writeWordInCache(address);
-        }
-        else{
-            Cache.dataStatistics.increaseMiss();
-            writeBlockInCache(address);
-        }
-    }
-
-    private static void WTvsWN(int address)
-    {
-        Cache.dataStatistics.increaseCopiesBack(1);
-        if( isInCache(address)){
-            Cache.dataStatistics.increaseHit();
-            writeWordInCache(address);
-        }
-        else{
-            Cache.dataStatistics.increaseMiss();
-        }
-    }
-
-    private static void WBvsWA(int address)
-    {
-        setDirtyBlock(address);
-        if( isInCache(address)) {
-            Cache.dataStatistics.increaseHit();
-        }
-        else{
-            Cache.dataStatistics.increaseMiss();
-            writeBlockInCache(address);
-        }
-
-    }
-
-    private static void WBvsWN(int address)
-    {
-        if( isInCache(address)) {
-            Cache.dataStatistics.increaseHit();
-            setDirtyBlock(address);
-        }
-        else{
-            Cache.dataStatistics.increaseMiss();
-            Cache.dataStatistics.increaseCopiesBack(1);
-        }
-    }
-
-    //TODO : complete
-    private static void setDirtyBlock(int address)
-    {
-
-    }
-
-    //TODO : complete
-    private static boolean isInCache(int address)
-    {
+        long n = (long) Long.parseLong(address, 16);
+//        long setIndex = n%dSets.size() ;
         return false;
-    }
-
-
-    //TODO : complete
-    private static void writeBlockInCache(int address)
-    {
-
-    }
-
-
-    //TODO : complete
-    private static void writeWordInCache(int address)
-    {
-
-    }
-
-    //TODO : complete
-    private void expulsionBlock(int address)
-    {
-        Cache.dataStatistics.increaseCopiesBack(Cache.BaseInfo.blockSize/4);
     }
 
 }

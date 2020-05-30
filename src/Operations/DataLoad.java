@@ -9,7 +9,7 @@ public class DataLoad {
         this.cache = cache ;
     }
 
-    public static void loadData(int address)
+    public static void loadData(String address)
     {}
 
 }

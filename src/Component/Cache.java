@@ -10,12 +10,14 @@ import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.logging.LoggingPermission;
 
 public class Cache {
 
     public static Statistics dataStatistics ;
     protected static HashMap<Integer ,Set> dSets ;
     public static int dCacheSize ;
+    public static boolean isCurrentAddressIn ;
 
     public static class BaseInfo
     {
@@ -131,8 +133,9 @@ public class Cache {
 //        System.out.println(dSets);
     }
 
-    public void doOrder(LoadStoreState state , int address)
+    public void doOrder(LoadStoreState state , String address)
     {
+        System.out.println(state.toString());
         switch (state.toString()){
             case "dataLoad" :
                 DataLoad.loadData(address);
@@ -143,6 +146,7 @@ public class Cache {
         }
 
     }
+
 
     //TODO : complete
     public void cleanUpCache()

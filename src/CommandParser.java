@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class CommandParser {
     private static ArrayList<LoadStoreState> loadStoreStates;
     private static Cache cache ;
+    private static ICache iCache;
 
     public static void main(String[] args)
     {
@@ -21,7 +22,7 @@ public class CommandParser {
         Output output = new Output(cache) ;
         output.printCacheInfo();
         cache.buildCache();
-//        readOrders(scanner);
+        readOrders(scanner);
 //        cache.cleanUpCache();
     }
 
@@ -30,12 +31,11 @@ public class CommandParser {
         String line = null ;
         while( !(line =scanner.nextLine()).isEmpty()){
             String[] arrOfStr = line.split("\\s+");
-            if(arrOfStr[0].equals("instructionLoad")){
-                ICache iCache = (ICache) cache;
+            if(arrOfStr[0].equals("2")){
                 iCache.fetchInstruction(Integer.valueOf(arrOfStr[1]));
             }
             else
-                cache.doOrder(readState(Integer.valueOf(arrOfStr[0])), Integer.valueOf(arrOfStr[1]));
+                cache.doOrder(readState(Integer.valueOf(arrOfStr[0])), arrOfStr[1]);
         }
 
     }
@@ -55,12 +55,6 @@ public class CommandParser {
                 break;
         }
         return res;
-    }
-
-    private static void addLoadStoreState(LoadStoreState state)
-    {
-        if( !loadStoreStates.contains(state))
-            loadStoreStates.add(state) ;
     }
 
     private static void readFirstLine(Scanner scanner)
@@ -107,7 +101,7 @@ public class CommandParser {
         String[] arrOfStr = line.split(" - ");
         cache.dCacheSize = (Integer.valueOf(arrOfStr[0]));
         if( arrOfStr.length==2 ){
-            ICache iCache = (ICache)cache ;
+            iCache = (ICache)cache ;
             iCache.iCacheSize = (Integer.valueOf(arrOfStr[1]));
         }
 

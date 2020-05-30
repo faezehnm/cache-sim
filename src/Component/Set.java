@@ -36,4 +36,7 @@ public class Set {
         addBlock(block);
     }
 
+    public LinkedList<Block> getBlocks() {
+        return blocks;
+    }
 }
