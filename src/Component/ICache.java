@@ -1,27 +1,34 @@
 package Component;
 
+import Operations.CacheManager;
+
 import java.util.HashMap;
 
 public class ICache extends Cache {
     public static int iCacheSize ;
     public static Statistics instructionStatistics;
-    protected static HashMap<Integer ,Set> dSets ;
+    protected static HashMap<Integer ,Set> iSets ;
 
     @Override
     public void buildCache()
     {
         super.buildCache();
-        dSets = new HashMap<>();
+        iSets = new HashMap<>();
         for( int  i=0 ; i< iCacheSize/BaseInfo.blockSize ; i++){
-            dSets.put(i ,new Set()) ;
+            iSets.put(i ,new Set()) ;
         }
+        instructionStatistics = new Statistics();
+        instructionStatistics.initial();
     }
 
 
-    //TODO : complete
-    public void fetchInstruction(int address)
+    public void fetchInstruction(String address)
     {
         System.out.println("instructionLoad");
+        if( CacheManager.isDataInCache(address))
+            instructionStatistics.increaseHit();
+        else
+            instructionStatistics.increaseMiss();
     }
 
 

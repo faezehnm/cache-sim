@@ -33,7 +33,7 @@ public class CommandParser {
         while( !(line =scanner.nextLine()).isEmpty()){
             String[] arrOfStr = line.split("\\s+");
             if(arrOfStr[0].equals("2")){
-                iCache.fetchInstruction(Integer.valueOf(arrOfStr[1]));
+                iCache.fetchInstruction(arrOfStr[1]);
             }
             else
                 cache.doOrder(readState(Integer.valueOf(arrOfStr[0])), arrOfStr[1]);
