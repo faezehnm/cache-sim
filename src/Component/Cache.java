@@ -15,7 +15,7 @@ import java.util.logging.LoggingPermission;
 public class Cache {
 
     public static Statistics dataStatistics ;
-    protected static HashMap<Integer ,Set> dSets ;
+    public static HashMap<Integer ,Set> dSets ;
     public static int dCacheSize ;
     public static boolean isCurrentAddressIn ;
 
@@ -26,6 +26,7 @@ public class Cache {
         public static int associativity;
         public static WritePolicy writePolicy ;
         public static AllocationPolicy allocationPolicy;
+        public static int dOffset =(int)(Math.log(dCacheSize/blockSize) / Math.log(2)) ;
     }
 
     public class Statistics

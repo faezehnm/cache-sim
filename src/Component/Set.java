@@ -16,12 +16,11 @@ public class Set {
     public void addBlock(Block block)
     {
         if( !blocks.contains(block) ){
-            if(  blocks.size()==blocksNum )
+            if(  blocks.size()== blocksNum )
                 replaceBlock(block);
             else
                 blocks.addFirst(block);
         }
-
     }
 
     public void updateBlockSituation(Block block)
@@ -38,5 +37,14 @@ public class Set {
 
     public LinkedList<Block> getBlocks() {
         return blocks;
+    }
+
+    public Block findBlock(String tag)
+    {
+        for(int i=0 ; i<blocks.size() ; i++){
+            if( blocks.get(i).getTag().equals(tag))
+                return blocks.get(i);
+        }
+        return null;
     }
 }
