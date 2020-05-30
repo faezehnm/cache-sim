@@ -10,6 +10,11 @@ public class DataLoad {
     }
 
     public static void loadData(String address)
-    {}
+    {
+        if( CacheManager.isDataInCache(address))
+            Cache.dataStatistics.increaseHit();
+        else
+            Cache.dataStatistics.increaseMiss();
+    }
 
 }

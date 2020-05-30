@@ -14,7 +14,7 @@ import java.util.logging.LoggingPermission;
 
 public class Cache {
 
-    public static Statistics dataStatistics ;
+    public static Statistics dataStatistics  ;
     public static HashMap<Integer ,Set> dSets ;
     public static int dCacheSize ;
     public static boolean isCurrentAddressIn ;
@@ -26,38 +26,48 @@ public class Cache {
         public static int associativity;
         public static WritePolicy writePolicy ;
         public static AllocationPolicy allocationPolicy;
-        public static int dOffset =(int)(Math.log(dCacheSize/blockSize) / Math.log(2)) ;
+        public static int bitDOffset;
+        public static int bitSet ;
+        public static int setNum ;
+        public static void setbitDOffset()
+        {
+            bitDOffset =(int)(Math.log(dCacheSize/blockSize) / Math.log(2)) ;
+            setNum = dCacheSize/BaseInfo.blockSize/BaseInfo.associativity;
+            bitSet = (int)(Math.log(setNum) / Math.log(2)) ;
+        }
     }
 
-    public class Statistics
+    public static class Statistics
     {
-        private long access ;
-        private long misses ;
-        private long hits ;
-        private float missRate ;
-        private float hitRate ;
-        private long replaceNum ;
-        private long demandFetch ;
-        private long copiesBack ;
+        public static long access ;
+        public static long misses ;
+        public static long hits ;
+        public static float missRate ;
+        public static float hitRate ;
+        public static long replaceNum ;
+        public static long demandFetch ;
+        public static long copiesBack ;
 
-        public Statistics()
+        public void initial()
         {
-            access = 0 ;
-            misses = 0 ;
-            hits = 0 ;
-            missRate = (float) 0.0;
-            hitRate = (float) 0.0 ;
-            replaceNum =0 ;
+            this.access = 0 ;
+            this.misses = 0 ;
+            this.hits = 0 ;
+            this.missRate = (float) 0.0;
+            this.hitRate = (float) 0.0 ;
+            this.replaceNum =0 ;
         }
 
         public void increaseMiss()
         {
+            System.out.println("miss");
             access++ ;
             misses ++ ;
         }
 
         public void increaseHit()
         {
+            System.out.println("hit");
             access++ ;
             hits++ ;
         }
@@ -129,8 +139,10 @@ public class Cache {
     {
         dSets = new HashMap<>();
         for( int  i=0 ; i< dCacheSize/BaseInfo.blockSize/BaseInfo.associativity ; i++){
-            dSets.put(i ,new Set(BaseInfo.associativity)) ;
+            dSets.put(i ,new Set()) ;
         }
+        dataStatistics = new Statistics();
+        dataStatistics.initial();
 //        System.out.println(dSets);
     }
 

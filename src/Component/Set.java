@@ -7,10 +7,14 @@ public class Set {
     private int blocksNum ;
     private LinkedList<Block> blocks ;
 
-    public Set(int blocksNum )
+    public Set()
     {
-        this.blocksNum = blocksNum ;
+        this.blocksNum = Cache.BaseInfo.associativity ;
+
         blocks = new LinkedList<>();
+        for( int i=0 ; i<blocksNum ; i++) {
+            addBlock(new Block());
+        }
     }
 
     public void addBlock(Block block)
@@ -36,6 +40,7 @@ public class Set {
     }
 
     public LinkedList<Block> getBlocks() {
+//        System.out.println(blocks);
         return blocks;
     }
 

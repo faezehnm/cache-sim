@@ -13,7 +13,7 @@ public class ICache extends Cache {
         super.buildCache();
         dSets = new HashMap<>();
         for( int  i=0 ; i< iCacheSize/BaseInfo.blockSize ; i++){
-            dSets.put(i ,new Set(BaseInfo.associativity)) ;
+            dSets.put(i ,new Set()) ;
         }
     }
 
