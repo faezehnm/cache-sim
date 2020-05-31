@@ -77,9 +77,9 @@ public class Cache {
             replaceNum++;
         }
 
-        public void increaseDemandFetch()
+        public void increaseDemandFetch(int toAdd)
         {
-            demandFetch++;
+            demandFetch += toAdd;
         }
 
         public void increaseCopiesBack(int toIncrease)
@@ -97,39 +97,47 @@ public class Cache {
             hitRate =(float) hits/access ;
         }
 
-        public long getAccess() {
+        public long getAccess()
+        {
             return access;
         }
 
-        public long getMisses() {
+        public long getMisses()
+        {
             return misses;
         }
 
-        public long getHits() {
+        public long getHits()
+        {
             return hits;
         }
 
-        public double getMissRate() {
+        public double getMissRate()
+        {
             calculateMissRate();
             double valueRounded = Math.round(missRate * 10000D) / 10000D;
             return valueRounded;
         }
 
-        public double getHitRate() {
+        public double getHitRate()
+        {
             calculateHitRate();
-            double valueRounded = Math.round(missRate * 10000D) / 10000D;
+            double valueRounded = Math.round(hitRate * 10000D) / 10000D;
             return valueRounded;
         }
 
-        public long getReplaceNum() {
+        public long getReplaceNum()
+        {
             return replaceNum;
         }
 
-        public long getDemandFetch() {
+        public long getDemandFetch()
+        {
             return demandFetch;
         }
 
-        public long getCopiesBack() {
+        public long getCopiesBack()
+        {
             return copiesBack;
         }
     }
@@ -143,7 +151,10 @@ public class Cache {
         }
         dataStatistics = new Statistics();
         dataStatistics.initial();
-//        System.out.println(dSets);
+//        for (int i=0 ; i<dSets.size() ; i++){
+//            System.out.println(dSets.get(i).getBlocks().size());
+//        }
+
     }
 
     public void doOrder(LoadStoreState state , String address)
@@ -166,7 +177,7 @@ public class Cache {
     {
         /*
         check all dirty bit & if that block was dirty expulsion from cache
-        use method expulsionBlock
+        use method expulsionDataBlock
          */
     }
 

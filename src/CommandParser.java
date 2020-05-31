@@ -24,6 +24,7 @@ public class CommandParser {
         output.printCacheInfo();
         cache.buildCache();
         readOrders(scanner);
+        output.printOutput();
 //        cache.cleanUpCache();
     }
 

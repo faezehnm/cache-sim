@@ -10,12 +10,11 @@ public class Output {
     }
 
 
-//    public void printOutput()
-//    {
-//        printCacheInfo();
-//        printStatistics();
-//    }
-
+    public void printOutput()
+    {
+        printCacheInfo();
+        printStatistics();
+    }
 
     public void printCacheInfo()
     {
@@ -90,14 +89,13 @@ public class Output {
         System.out.println("DATA");
         System.out.println("accesses: " + cache.dataStatistics.getAccess());
         System.out.println("misses: " + cache.dataStatistics.getMisses());
-        System.out.println("miss rate: " + cache.dataStatistics.getHitRate());
+        System.out.println("miss rate: " + cache.dataStatistics.getMissRate() + " (hit rate " +Cache.dataStatistics.getHitRate() + ")");
         System.out.println("replace: " + cache.dataStatistics.getReplaceNum());
-
     }
 
     private void printTraffic()
     {
-        System.out.println("TRAFFIC (in worlds)");
+        System.out.println("TRAFFIC (in words)");
         System.out.println("demand fetch: " + cache.dataStatistics.getDemandFetch() );
         System.out.println("copies back: " +cache.dataStatistics.getCopiesBack() );
     }

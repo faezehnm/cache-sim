@@ -36,14 +36,16 @@ public class DataStore {
 
         protected static void WBvsWA(String address)
         {
-            CacheManager.setDirtyBlock(address);
+
             if( CacheManager.isDataInCache(address)) {
+                System.out.println("**");
                 Cache.dataStatistics.increaseHit();
             }
             else{
                 Cache.dataStatistics.increaseMiss();
                 CacheManager.writeBlockInCache(address);
             }
+            CacheManager.setDirtyBlock(address);
 
         }
 

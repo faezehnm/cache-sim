@@ -21,7 +21,6 @@ public class ICache extends Cache {
         instructionStatistics.initial();
     }
 
-
     public void fetchInstruction(String address)
     {
         System.out.println("instructionLoad");

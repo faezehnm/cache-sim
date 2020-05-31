@@ -10,11 +10,7 @@ public class Set {
     public Set()
     {
         this.blocksNum = Cache.BaseInfo.associativity ;
-
         blocks = new LinkedList<>();
-        for( int i=0 ; i<blocksNum ; i++) {
-            addBlock(new Block());
-        }
     }
 
     public void addBlock(Block block)

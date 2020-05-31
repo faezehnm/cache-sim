@@ -11,10 +11,14 @@ public class DataLoad {
 
     public static void loadData(String address)
     {
-        if( CacheManager.isDataInCache(address))
+        if( CacheManager.isDataInCache(address)) {
             Cache.dataStatistics.increaseHit();
-        else
+        }
+        else {
             Cache.dataStatistics.increaseMiss();
+            CacheManager.writeBlockInCache(address);
+            Cache.dataStatistics.increaseDemandFetch(Cache.BaseInfo.blockSize/4);
+        }
     }
 
 }
