@@ -15,7 +15,7 @@ import java.util.logging.LoggingPermission;
 public class Cache {
 
     public static Statistics dataStatistics  ;
-    public static HashMap<Integer ,Set> dSets ;
+    public static HashMap<Long ,Set> dSets ;
     public static int dCacheSize ;
     public static boolean isCurrentAddressIn ;
 
@@ -29,11 +29,16 @@ public class Cache {
         public static int bitDOffset;
         public static int bitSet ;
         public static int setNum ;
+
         public static void setbitDOffset()
         {
-            bitDOffset =(int)(Math.log(dCacheSize/blockSize) / Math.log(2)) ;
+            bitDOffset =(int)(Math.log(blockSize/4) / Math.log(2)) ;
             setNum = dCacheSize/BaseInfo.blockSize/BaseInfo.associativity;
             bitSet = (int)(Math.log(setNum) / Math.log(2)) ;
+            System.out.println(bitDOffset);
+            System.out.println(bitSet);
+//            System.out.println(Cache.BaseInfo.blockSize/4);
+//            System.out.println(bitDOffset);
         }
     }
 
@@ -146,11 +151,14 @@ public class Cache {
     public void buildCache()
     {
         dSets = new HashMap<>();
-        for( int  i=0 ; i< dCacheSize/BaseInfo.blockSize/BaseInfo.associativity ; i++){
+//        System.out.println(dCacheSize/BaseInfo.blockSize/BaseInfo.associativity);
+        for( long  i=0 ; i< BaseInfo.setNum ; i++){
             dSets.put(i ,new Set()) ;
         }
         dataStatistics = new Statistics();
         dataStatistics.initial();
+
+//        System.out.println(dSets.size());
 //        for (int i=0 ; i<dSets.size() ; i++){
 //            System.out.println(dSets.get(i).getBlocks().size());
 //        }

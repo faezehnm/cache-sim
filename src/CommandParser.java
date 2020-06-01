@@ -18,10 +18,9 @@ public class CommandParser {
         Scanner scanner = new Scanner(System.in);
         cache = new Cache();
         readFirstLine(scanner);
-        Cache.BaseInfo.setbitDOffset();
         readSecondLine(scanner);
+        Cache.BaseInfo.setbitDOffset();
         Output output = new Output(cache) ;
-        output.printCacheInfo();
         cache.buildCache();
         readOrders(scanner);
         output.printOutput();

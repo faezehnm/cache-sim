@@ -8,33 +8,26 @@ public class Block {
     private int dirtyBit ;
     private String tag ;
 
-    public Block()
+    public Block(String tag)
     {
-        validBit = 0 ;
+        this.tag = tag ;
+        validBit = 1 ;
         dirtyBit = 0 ;
+    }
+    public void setDirtyBit(int dirtyBit) {
+        this.dirtyBit = dirtyBit;
     }
 
     public int getValidBit() {
         return validBit;
     }
 
-    public void setValidBit(int validBit) {
-        this.validBit = validBit;
-    }
-
     public int getDirtyBit() {
         return dirtyBit;
-    }
-
-    public void setDirtyBit(int dirtyBit) {
-        this.dirtyBit = dirtyBit;
     }
 
     public String getTag() {
         return tag;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
 }
