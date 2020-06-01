@@ -32,11 +32,10 @@ public class Cache {
 
         public static void setbitDOffset()
         {
-            bitDOffset =(int)(Math.log(blockSize/4) / Math.log(2)) ;
+            bitDOffset =(int)(Math.log(blockSize) / Math.log(2)) ;
             setNum = dCacheSize/BaseInfo.blockSize/BaseInfo.associativity;
             bitSet = (int)(Math.log(setNum) / Math.log(2)) ;
-            System.out.println(bitDOffset);
-            System.out.println(bitSet);
+//            System.out.println(setNum);
 //            System.out.println(Cache.BaseInfo.blockSize/4);
 //            System.out.println(bitDOffset);
         }
