@@ -72,15 +72,16 @@ public class Output {
             System.out.println("INSTRUCTIONS");
             System.out.println("accesses: " + iCache.instructionStatistics.getAccess());
             System.out.println("misses: " + iCache.instructionStatistics.getMisses());
-            System.out.println("miss rate: " + iCache.instructionStatistics.getMissRate() + "(hit rate " +iCache.instructionStatistics.getHitRate() + ")");
+            System.out.println("miss rate: " + iCache.instructionStatistics.getMissRate() + " (hit rate " +iCache.instructionStatistics.getHitRate() + ")");
             System.out.println("replace: " + iCache.instructionStatistics.getReplaceNum());
         }
         else {
-            System.out.println("DATA");
-            System.out.println("accesses: " + 0);
-            System.out.println("misses: " + 0);
-            System.out.println("miss rate: " + "0.0000 " + "(hit rate 0.0000)");
-            System.out.println("replace: " + 0);
+
+            System.out.println("INSTRUCTIONS");
+            System.out.println("accesses: " + Cache.getiStatistics().getAccess());
+            System.out.println("misses: " + Cache.getiStatistics().getMisses());
+            System.out.println("miss rate: " + Cache.getiStatistics().getMissRate() +" (hit rate "  + Cache.getiStatistics().getHitRate() +  ")");
+            System.out.println("replace: " + Cache.getiStatistics().getReplaceNum() );
         }
     }
 
@@ -96,10 +97,18 @@ public class Output {
     private void printTraffic()
     {
         System.out.println("TRAFFIC (in words)");
-        long fetch = cache.dataStatistics.getDemandFetch()+ICache.instructionStatistics.getDemandFetch();
-        long copiesBack = cache.dataStatistics.getCopiesBack()+ICache.instructionStatistics.getCopiesBack();
-        System.out.println("demand fetch: " + fetch );
-        System.out.println("copies back: " + copiesBack );
+        if( Cache.BaseInfo.architecture.toString().equals("harvard")) {
+            long fetch = cache.dataStatistics.getDemandFetch() + ICache.instructionStatistics.getDemandFetch();
+            long copiesBack = cache.dataStatistics.getCopiesBack() + ICache.instructionStatistics.getCopiesBack();
+            System.out.println("demand fetch: " + fetch);
+            System.out.println("copies back: " + copiesBack);
+        }
+        else {
+            long fetch = cache.dataStatistics.getDemandFetch() + Cache.getiStatistics().getDemandFetch();
+            long copiesBack = cache.dataStatistics.getCopiesBack() + Cache.getiStatistics().getCopiesBack();
+            System.out.println("demand fetch: " + fetch);
+            System.out.println("copies back: " + copiesBack);
+        }
     }
 
 }

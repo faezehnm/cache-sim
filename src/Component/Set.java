@@ -1,5 +1,7 @@
 package Component;
 
+import Operations.CacheManager;
+
 import java.util.LinkedList;
 
 public class Set {
@@ -13,7 +15,7 @@ public class Set {
         blocks = new LinkedList<>();
     }
 
-    public void addBlock(Block block)
+    public void addBlock(Block block )
     {
 //        System.out.print(" &&&& add block to set, " );
 //        System.out.println();
@@ -21,7 +23,7 @@ public class Set {
 //            System.out.print("doesn't contain before,  ");
 
             if(  blocks.size()== blocksNum ) {
-//                System.out.println("set is full so replace ");
+                System.out.println("set is full so replace ");
                 replaceBlock(block);
             }
             else {
@@ -34,12 +36,33 @@ public class Set {
 
     public void updateBlockSituation(Block block)
     {
-        blocks.remove(block);
+        blocks.remove(findBlock(block.getTag()));
         addBlock(block);
     }
 
     public void replaceBlock(Block block)
     {
+        block.setDirtyBit(1);
+
+        switch (block.getType())
+        {
+            case "data" :
+                Cache.dataStatistics.increaseReplaceNum();
+                break;
+            case "instruction" :
+                switch (Cache.BaseInfo.architecture.toString()) {
+                    case "harvard" :
+                        ICache.instructionStatistics.increaseReplaceNum();
+                        break;
+                    case "vonNeumann":
+                        Cache.getiStatistics().increaseReplaceNum();
+                        break;
+
+                }
+
+        }
+
+
         blocks.removeLast();
         addBlock(block);
     }

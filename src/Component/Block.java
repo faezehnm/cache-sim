@@ -7,10 +7,12 @@ public class Block {
     private int validBit ;
     private int dirtyBit ;
     private String tag ;
+    private String type;
 
-    public Block(String tag)
+    public Block(String tag , String type )
     {
         this.tag = tag ;
+        this.type = type;
         validBit = 1 ;
         dirtyBit = 0 ;
     }
@@ -30,4 +32,7 @@ public class Block {
         return tag;
     }
 
+    public String getType() {
+        return type;
+    }
 }

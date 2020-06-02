@@ -22,12 +22,10 @@ public class Address {
         this.set =  block%Cache.BaseInfo.setNum;
 
 
-         bytes = Integer.toBinaryString(decimal);
-
-
+        bytes = Integer.toBinaryString(decimal);
 
         int toAdd = 8 - str.length();
-        System.out.println("fun" +toAdd);
+//        System.out.println("fun" +toAdd);
         for (int i =0 ; i<toAdd ; i++){
             tag+="00000";
         }

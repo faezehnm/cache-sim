@@ -3,18 +3,15 @@ import Enums.AllocationPolicy;
 import Enums.ArchitectureType;
 import Enums.LoadStoreState;
 import Enums.WritePolicy;
-import Operations.DataLoad;
-import Operations.DataStore;
+import Operations.Load;
+import Operations.Store;
 
-import javax.jws.soap.SOAPBinding;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.logging.LoggingPermission;
 
 public class Cache {
 
     public static Statistics dataStatistics  ;
+    private static Statistics iStatistics;
     public static HashMap<Long ,Set> dSets ;
     public static int dCacheSize ;
     public static boolean isCurrentAddressIn ;
@@ -79,6 +76,7 @@ public class Cache {
         public void increaseReplaceNum()
         {
             replaceNum++;
+            System.out.println("*************************");
         }
 
         public void increaseDemandFetch(int toAdd)
@@ -116,6 +114,8 @@ public class Cache {
             return hits;
         }
 
+
+        //TODO : set 4 digit after dot
         public double getMissRate()
         {
             calculateMissRate();
@@ -123,6 +123,7 @@ public class Cache {
             return valueRounded;
         }
 
+        //TODO : set 4 digit after dot
         public double getHitRate()
         {
             calculateHitRate();
@@ -156,6 +157,8 @@ public class Cache {
         }
         dataStatistics = new Statistics();
         dataStatistics.initial();
+        iStatistics = new Statistics();
+        iStatistics.initial();
 
 //        System.out.println(dSets.size());
 //        for (int i=0 ; i<dSets.size() ; i++){
@@ -169,10 +172,13 @@ public class Cache {
         System.out.println(state.toString());
         switch (state.toString()){
             case "dataLoad" :
-                DataLoad.loadData(address);
+                Load.loadData(address);
                 break;
             case "dataStore" :
-                DataStore.storeData(address);
+                Store.storeData(address);
+                break;
+            case "instructionLoad" :
+                Load.loadInstruction(address);
                 break;
         }
 
@@ -189,9 +195,9 @@ public class Cache {
     }
 
 
-
-
-
+    public static Statistics getiStatistics() {
+        return iStatistics;
+    }
 }
 
 

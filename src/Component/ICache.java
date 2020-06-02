@@ -1,5 +1,7 @@
 package Component;
 
+import Enums.ArchitectureType;
+import Enums.DataOrInstruction;
 import Operations.Address;
 import Operations.CacheManager;
 
@@ -29,7 +31,7 @@ public class ICache extends Cache {
             instructionStatistics.increaseHit();
         else {
             instructionStatistics.increaseMiss();
-            CacheManager.writeBlockInCache(address,iSets);
+            CacheManager.writeBlockInCache(address,iSets, DataOrInstruction.instruction);
             instructionStatistics.increaseDemandFetch(ICache.BaseInfo.blockSize/4);
         }
     }

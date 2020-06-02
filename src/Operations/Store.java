@@ -2,10 +2,12 @@ package Operations;
 
 import Component.Block;
 import Component.Cache;
+import Enums.ArchitectureType;
+import Enums.DataOrInstruction;
 
 import java.util.Map;
 
-public class DataStore {
+public class Store {
 
     static class WriteState
     {
@@ -14,11 +16,11 @@ public class DataStore {
             Cache.dataStatistics.increaseCopiesBack(1);
             if( CacheManager.isInCache(address ,Cache.dSets)){
                 Cache.dataStatistics.increaseHit();
-                CacheManager.writeBlockInCache(address,Cache.dSets);
+                CacheManager.writeBlockInCache(address,Cache.dSets, DataOrInstruction.data);
             }
             else{
                 Cache.dataStatistics.increaseMiss();
-                CacheManager.writeBlockInCache(address ,Cache.dSets);
+                CacheManager.writeBlockInCache(address ,Cache.dSets,DataOrInstruction.data);
             }
         }
 
@@ -27,7 +29,7 @@ public class DataStore {
             Cache.dataStatistics.increaseCopiesBack(1);
             if( CacheManager.isInCache(address , Cache.dSets)){
                 Cache.dataStatistics.increaseHit();
-                CacheManager.writeBlockInCache(address , Cache.dSets);
+                CacheManager.writeBlockInCache(address , Cache.dSets, DataOrInstruction.data);
             }
             else{
                 Cache.dataStatistics.increaseMiss();
@@ -43,9 +45,9 @@ public class DataStore {
             }
             else{
                 Cache.dataStatistics.increaseMiss();
-                CacheManager.writeBlockInCache(address , Cache.dSets);
+                CacheManager.writeBlockInCache(address , Cache.dSets, DataOrInstruction.data);
             }
-            CacheManager.setDirtyBlock(address , Cache.dSets);
+            CacheManager.setDirtyBlock(address , Cache.dSets , DataOrInstruction.data);
 
         }
 
@@ -53,7 +55,7 @@ public class DataStore {
         {
             if( CacheManager.isInCache(address , Cache.dSets)) {
                 Cache.dataStatistics.increaseHit();
-                CacheManager.setDirtyBlock(address , Cache.dSets);
+                CacheManager.setDirtyBlock(address , Cache.dSets , DataOrInstruction.data);
             }
             else{
                 Cache.dataStatistics.increaseMiss();
