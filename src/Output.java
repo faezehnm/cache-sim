@@ -96,8 +96,10 @@ public class Output {
     private void printTraffic()
     {
         System.out.println("TRAFFIC (in words)");
-        System.out.println("demand fetch: " + cache.dataStatistics.getDemandFetch() );
-        System.out.println("copies back: " +cache.dataStatistics.getCopiesBack() );
+        long fetch = cache.dataStatistics.getDemandFetch()+ICache.instructionStatistics.getDemandFetch();
+        long copiesBack = cache.dataStatistics.getCopiesBack()+ICache.instructionStatistics.getCopiesBack();
+        System.out.println("demand fetch: " + fetch );
+        System.out.println("copies back: " + copiesBack );
     }
 
 }
