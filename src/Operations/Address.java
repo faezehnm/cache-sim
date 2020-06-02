@@ -14,7 +14,7 @@ public class Address {
     String bytes ;
     int tagg;
 
-    Address( String str )
+    public Address(String str)
     {
         this.address = str;
         this.decimal = Integer.parseInt(str,16) ;

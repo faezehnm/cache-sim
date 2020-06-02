@@ -43,14 +43,14 @@ public class Cache {
 
     public static class Statistics
     {
-        public static long access ;
-        public static long misses ;
-        public static long hits ;
-        public static float missRate ;
-        public static float hitRate ;
-        public static long replaceNum ;
-        public static long demandFetch ;
-        public static long copiesBack ;
+        public long access ;
+        public long misses ;
+        public long hits ;
+        public float missRate ;
+        public float hitRate ;
+        public long replaceNum ;
+        public long demandFetch ;
+        public long copiesBack ;
 
         public void initial()
         {

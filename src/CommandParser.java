@@ -16,7 +16,6 @@ public class CommandParser {
     public static void main(String[] args)
     {
         Scanner scanner = new Scanner(System.in);
-        cache = new Cache();
         readFirstLine(scanner);
         readSecondLine(scanner);
         Cache.BaseInfo.setbitDOffset();
@@ -32,7 +31,9 @@ public class CommandParser {
         String line = null ;
         while( !(line =scanner.nextLine()).isEmpty()){
             String[] arrOfStr = line.split("\\s+");
+            System.out.println("in index " + arrOfStr[1]);
             if(arrOfStr[0].equals("2")){
+
                 iCache.fetchInstruction(arrOfStr[1]);
             }
             else
@@ -72,11 +73,14 @@ public class CommandParser {
 
     private static void setArchitecture(String architecture)
     {
-        if( architecture.equals("0") )
+        if( architecture.equals("0") ) {
             Cache.BaseInfo.architecture = (ArchitectureType.vonNeumann);
+            cache = new Cache();
+        }
         else {
             Cache.BaseInfo.architecture = (ArchitectureType.harvard);
             cache = new ICache();
+            iCache = (ICache)cache;
         }
     }
 
@@ -102,7 +106,7 @@ public class CommandParser {
         String[] arrOfStr = line.split(" - ");
         cache.dCacheSize = (Integer.valueOf(arrOfStr[0]));
         if( arrOfStr.length==2 ){
-            iCache = (ICache)cache ;
+//            iCache = (ICache)cache ;
             iCache.iCacheSize = (Integer.valueOf(arrOfStr[1]));
         }
 

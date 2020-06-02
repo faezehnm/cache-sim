@@ -12,22 +12,22 @@ public class DataStore {
         protected static void WTvsWA(String address)
         {
             Cache.dataStatistics.increaseCopiesBack(1);
-            if( CacheManager.isDataInCache(address)){
+            if( CacheManager.isInCache(address ,Cache.dSets)){
                 Cache.dataStatistics.increaseHit();
-                CacheManager.writeBlockInCache(address);
+                CacheManager.writeBlockInCache(address,Cache.dSets);
             }
             else{
                 Cache.dataStatistics.increaseMiss();
-                CacheManager.writeBlockInCache(address);
+                CacheManager.writeBlockInCache(address ,Cache.dSets);
             }
         }
 
         protected static void WTvsWN(String address)
         {
             Cache.dataStatistics.increaseCopiesBack(1);
-            if( CacheManager.isDataInCache(address)){
+            if( CacheManager.isInCache(address , Cache.dSets)){
                 Cache.dataStatistics.increaseHit();
-                CacheManager.writeBlockInCache(address);
+                CacheManager.writeBlockInCache(address , Cache.dSets);
             }
             else{
                 Cache.dataStatistics.increaseMiss();
@@ -37,23 +37,23 @@ public class DataStore {
         protected static void WBvsWA(String address)
         {
 
-            if( CacheManager.isDataInCache(address)) {
-                System.out.println("**");
+            if( CacheManager.isInCache(address , Cache.dSets)) {
+//                System.out.println("**");
                 Cache.dataStatistics.increaseHit();
             }
             else{
                 Cache.dataStatistics.increaseMiss();
-                CacheManager.writeBlockInCache(address);
+                CacheManager.writeBlockInCache(address , Cache.dSets);
             }
-            CacheManager.setDirtyBlock(address);
+            CacheManager.setDirtyBlock(address , Cache.dSets);
 
         }
 
         protected static void WBvsWN(String address)
         {
-            if( CacheManager.isDataInCache(address)) {
+            if( CacheManager.isInCache(address , Cache.dSets)) {
                 Cache.dataStatistics.increaseHit();
-                CacheManager.setDirtyBlock(address);
+                CacheManager.setDirtyBlock(address , Cache.dSets);
             }
             else{
                 Cache.dataStatistics.increaseMiss();

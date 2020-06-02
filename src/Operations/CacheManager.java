@@ -3,34 +3,37 @@ package Operations;
 import Component.Block;
 import Component.Cache;
 import Component.ICache;
+import Component.Set;
+
+import java.util.HashMap;
 
 public class CacheManager {
 
-    public static void writeBlockInCache(String address)
+    public static void writeBlockInCache(String address , HashMap<Long , Set> set)
     {
         Address current = new Address(address);
         Block block = new Block(current.getTag());
 //        System.out.println("in set "+ current.getSet());
-        Cache.dSets.get(current.getSet()).addBlock(block);
+        set.get(current.getSet()).addBlock(block);
     }
 
-    public static void setDirtyBlock(String address)
+    public static void setDirtyBlock(String address ,HashMap<Long , Set> set )
     {
         Address current = new Address(address);
         Block block = new Block(current.toString());
         block.setDirtyBit(1);
-        Cache.dSets.get(current.getSet()).addBlock(block);
+        set.get(current.getSet()).addBlock(block);
     }
 
-    public static boolean isDataInCache(String address)
+    public static boolean isInCache(String address ,HashMap<Long , Set> set)
     {
         Address current = new Address(address) ;
-        current.print();
+//        current.print();
 //        System.out.print("in " +address + " with tag: " + current.getTag());
-        if( Cache.dSets.get(current.getSet()).getBlocks().size()!=0) {
+        if( set.get(current.getSet()).getBlocks().size()!=0) {
 //            System.out.println(" ::::: set size" + Cache.dSets.get(current.getSet()).getBlocks().size());
 //            System.out.println(Cache.dSets.get(current.getSet()).getBlocks().get(0));
-            for (Block block : Cache.dSets.get(current.getSet()).getBlocks()) {
+            for (Block block : set.get(current.getSet()).getBlocks()) {
 //                System.out.println( block.getValidBit());
                 if (block.getValidBit() == 1 && block.getTag().equals(current.getTag())) {
                     return true;
@@ -41,26 +44,22 @@ public class CacheManager {
         return false;
     }
 
-    public static void expulsionDataBlock(String address)
+    public static void expulsionDataBlock(String address , HashMap<Long , Set> set , String type)
     {
-        Cache.dataStatistics.increaseCopiesBack(Cache.BaseInfo.blockSize/4);
-        Cache.dataStatistics.increaseReplaceNum();
+        if(type.equals("vonNeumann")) {
+            Cache.dataStatistics.increaseCopiesBack(Cache.BaseInfo.blockSize / 4);
+            Cache.dataStatistics.increaseReplaceNum();
+        }
+        else{
+            ICache.instructionStatistics.increaseCopiesBack(Cache.BaseInfo.blockSize / 4);
+            ICache.instructionStatistics.increaseReplaceNum();
+        }
         Address current = new Address(address);
         Block block = new Block(current.getTag());
-        Cache.dSets.get(current.getSet()).addBlock(block);
-        setDirtyBlock(address);
+        set.get(current.getSet()).addBlock(block);
+        setDirtyBlock(address , set);
     }
 
-//    public static void expulsionInstructionBlock(String address)
-//    {
-//        ICache.instructionStatistics.increaseCopiesBack(Cache.BaseInfo.blockSize/4);
-//        ICache.instructionStatistics.increaseReplaceNum();
-//        Address current = new Address(address);
-//        Block block = new Block();
-//        block.setTag(current.getTag());
-//        block.setValidBit(1);
-//        Cache.dSets.get(current.getSet()).replaceBlock(block);
-//        setDirtyBlock(address);
-//    }
+
 
 }

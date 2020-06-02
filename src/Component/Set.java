@@ -44,7 +44,8 @@ public class Set {
         addBlock(block);
     }
 
-    public LinkedList<Block> getBlocks() {
+    public LinkedList<Block> getBlocks()
+    {
 //        System.out.println(blocks);
         return blocks;
     }
