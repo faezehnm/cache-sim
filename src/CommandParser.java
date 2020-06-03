@@ -22,8 +22,14 @@ public class CommandParser {
         Output output = new Output(cache) ;
         cache.buildCache();
         readOrders(scanner);
+
+        if( Cache.BaseInfo.architecture.toString().equals("harvard")){
+            iCache.cleanUpCache();
+        }
+        else
+            cache.cleanUpCache();
+
         output.printOutput();
-//        cache.cleanUpCache();
     }
 
     private static void readOrders(Scanner scanner)

@@ -20,6 +20,7 @@ public class Store {
             }
             else{
                 Cache.dataStatistics.increaseMiss();
+                Cache.dataStatistics.increaseDemandFetch(Cache.BaseInfo.blockSize/4);
                 CacheManager.writeBlockInCache(address ,Cache.dSets,DataOrInstruction.data);
             }
         }

@@ -6,6 +6,7 @@ import Operations.Address;
 import Operations.CacheManager;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class ICache extends Cache {
     public static int iCacheSize ;
@@ -36,6 +37,16 @@ public class ICache extends Cache {
         }
     }
 
-
-
+    @Override
+    public void cleanUpCache()
+    {
+        super.cleanUpCache();
+        for (Map.Entry<Long, Set> entry : iSets.entrySet()) {
+            for( Block block : entry.getValue().getBlocks() ){
+                if( block.getDirtyBit()==1 ){
+                    ICache.instructionStatistics.increaseCopiesBack(Cache.BaseInfo.blockSize / 4);
+                }
+            }
+        }
+    }
 }

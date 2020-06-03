@@ -21,13 +21,14 @@ public class Set {
 //        System.out.println();
         if( !contain(block) ){
 //            System.out.print("doesn't contain before,  ");
-
+            System.out.println("block size is : " + blocks.size());
+            System.out.println(blocksNum);
             if(  blocks.size()== blocksNum ) {
                 System.out.println("set is full so replace ");
                 replaceBlock(block);
             }
             else {
-//                System.out.println("add successful");
+                System.out.println("add successful");
                 blocks.addFirst(block);
 //                System.out.println(blocks.size());
             }
@@ -42,8 +43,6 @@ public class Set {
 
     public void replaceBlock(Block block)
     {
-        block.setDirtyBit(1);
-
         switch (block.getType())
         {
             case "data" :
@@ -61,10 +60,12 @@ public class Set {
                 }
 
         }
-
-
+        block.setDirtyBit(1);
         blocks.removeLast();
         addBlock(block);
+        /*
+        increse copies back
+         */
     }
 
     public LinkedList<Block> getBlocks()

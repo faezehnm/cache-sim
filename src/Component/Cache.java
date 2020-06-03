@@ -7,6 +7,7 @@ import Operations.Load;
 import Operations.Store;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Cache {
 
@@ -185,13 +186,16 @@ public class Cache {
     }
 
 
-    //TODO : complete
+
     public void cleanUpCache()
     {
-        /*
-        check all dirty bit & if that block was dirty expulsion from cache
-        use method expulsionDataBlock
-         */
+        for (Map.Entry<Long, Set> entry : dSets.entrySet()) {
+            for( Block block : entry.getValue().getBlocks() ){
+                if( block.getDirtyBit()==1 ){
+                    Cache.dataStatistics.increaseCopiesBack(Cache.BaseInfo.blockSize / 4);
+                }
+            }
+        }
     }
 
 
