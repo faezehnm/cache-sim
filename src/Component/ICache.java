@@ -1,10 +1,8 @@
 package Component;
-
 import Enums.ArchitectureType;
 import Enums.DataOrInstruction;
 import Operations.Address;
 import Operations.CacheManager;
-
 import java.util.HashMap;
 import java.util.Map;
 

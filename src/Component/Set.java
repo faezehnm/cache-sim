@@ -1,7 +1,5 @@
 package Component;
-
 import Operations.CacheManager;
-
 import java.util.LinkedList;
 
 public class Set {
@@ -47,14 +45,17 @@ public class Set {
         {
             case "data" :
                 Cache.dataStatistics.increaseReplaceNum();
+//                Cache.dataStatistics.increaseCopiesBack(Cache.BaseInfo.blockSize/4);
                 break;
             case "instruction" :
                 switch (Cache.BaseInfo.architecture.toString()) {
                     case "harvard" :
                         ICache.instructionStatistics.increaseReplaceNum();
+//                        ICache.instructionStatistics.increaseCopiesBack(ICache.BaseInfo.blockSize/4);
                         break;
                     case "vonNeumann":
                         Cache.getiStatistics().increaseReplaceNum();
+//                        Cache.getiStatistics().increaseCopiesBack(Cache.BaseInfo.blockSize/4);
                         break;
 
                 }
@@ -63,14 +64,10 @@ public class Set {
         block.setDirtyBit(1);
         blocks.removeLast();
         addBlock(block);
-        /*
-        increse copies back
-         */
     }
 
     public LinkedList<Block> getBlocks()
     {
-//        System.out.println(blocks);
         return blocks;
     }
 
@@ -85,15 +82,10 @@ public class Set {
 
     private boolean contain(Block block)
     {
-//        System.out.println();
-//        System.out.println("shiiiiiiiiiiiiiiiiiiiiiit");
-
         for( int i=0 ; i<blocks.size() ; i++){
-//            System.out.println(blocks.get(i).getTag().equals(block.getTag()));
             if( blocks.get(i).getTag().equals(block.getTag()))
                 return true;
         }
-//        System.out.println("shiiiiiiiiiiiiiiiiiiiiiit");
         return false;
     }
 }

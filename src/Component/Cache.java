@@ -5,7 +5,6 @@ import Enums.LoadStoreState;
 import Enums.WritePolicy;
 import Operations.Load;
 import Operations.Store;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -186,7 +185,6 @@ public class Cache {
     }
 
 
-
     public void cleanUpCache()
     {
         for (Map.Entry<Long, Set> entry : dSets.entrySet()) {
@@ -199,7 +197,8 @@ public class Cache {
     }
 
 
-    public static Statistics getiStatistics() {
+    public static Statistics getiStatistics()
+    {
         return iStatistics;
     }
 }

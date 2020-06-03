@@ -13,7 +13,7 @@ public class CacheManager {
 
     public static void writeBlockInCache(String address , HashMap<Long , Set> set , DataOrInstruction type)
     {
-        System.out.println("lllllllllllllllllllllllloooooooooooooooooooollllll");
+//        System.out.println("lllllllllllllllllllllllloooooooooooooooooooollllll");
         Address current = new Address(address);
         Block block = new Block(current.getTag(),type.toString());
 //        System.out.println("in set "+ current.getSet());
@@ -45,23 +45,6 @@ public class CacheManager {
 
         return false;
     }
-
-    public static void expulsionDataBlock(String address , HashMap<Long , Set> set , DataOrInstruction type)
-    {
-        if(type.toString().equals("vonNeumann")) {
-            Cache.dataStatistics.increaseCopiesBack(Cache.BaseInfo.blockSize / 4);
-            Cache.dataStatistics.increaseReplaceNum();
-        }
-        else{
-            ICache.instructionStatistics.increaseCopiesBack(Cache.BaseInfo.blockSize / 4);
-            ICache.instructionStatistics.increaseReplaceNum();
-        }
-        Address current = new Address(address);
-        Block block = new Block(current.getTag(),type.toString());
-        set.get(current.getSet()).addBlock(block);
-//        setDirtyBlock(address , set, type);
-    }
-
 
 
 }

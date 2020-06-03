@@ -1,4 +1,5 @@
 package Operations;
+import Component.Block;
 import Component.Cache;
 import Enums.ArchitectureType;
 import Enums.DataOrInstruction;
@@ -15,6 +16,9 @@ public class Load {
     {
         if( CacheManager.isInCache(address , Cache.dSets)) {
             Cache.dataStatistics.increaseHit();
+            Block toUpdate =  Cache.dSets.get(new Address(address).getSet()).findBlock(new Address(address).getTag());
+            Cache.dSets.get(new Address(address).getSet()).updateBlockSituation(toUpdate);
+
         }
         else {
             Cache.dataStatistics.increaseMiss();
@@ -27,6 +31,8 @@ public class Load {
     {
         if( CacheManager.isInCache(address , Cache.dSets)) {
             Cache.getiStatistics().increaseHit();
+            Block toUpdate =  Cache.dSets.get(new Address(address).getSet()).findBlock(new Address(address).getTag());
+            Cache.dSets.get(new Address(address).getSet()).updateBlockSituation(toUpdate);
         }
         else {
             Cache.getiStatistics().increaseMiss();
