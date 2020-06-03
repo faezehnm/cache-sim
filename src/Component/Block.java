@@ -16,6 +16,7 @@ public class Block {
         dirtyBit = 0 ;
     }
     public void setDirtyBit(int dirtyBit) {
+//        System.out.println("ghhhhhhhhhhhhhhhhhhhhhhhhhhh");
         this.dirtyBit = dirtyBit;
     }
 

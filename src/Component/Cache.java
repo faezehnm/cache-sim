@@ -169,7 +169,7 @@ public class Cache {
 
     public void doOrder(LoadStoreState state , String address)
     {
-        System.out.println(state.toString());
+//        System.out.println(state.toString());
         switch (state.toString()){
             case "dataLoad" :
                 Load.loadData(address);
@@ -190,6 +190,7 @@ public class Cache {
         for (Map.Entry<Long, Set> entry : dSets.entrySet()) {
             for( Block block : entry.getValue().getBlocks() ){
                 if( block.getDirtyBit()==1 ){
+                    System.out.println("jppppppppppppppp");
                     Cache.dataStatistics.increaseCopiesBack(Cache.BaseInfo.blockSize / 4);
                 }
             }

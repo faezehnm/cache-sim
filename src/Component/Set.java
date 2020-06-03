@@ -1,4 +1,6 @@
 package Component;
+import Enums.AllocationPolicy;
+import Enums.WritePolicy;
 import Operations.CacheManager;
 import java.util.LinkedList;
 
@@ -19,7 +21,7 @@ public class Set {
 //        System.out.println();
         if( !contain(block) ){
 //            System.out.print("doesn't contain before,  ");
-            System.out.println("block size is : " + blocks.size());
+//            System.out.println("block size is : " + blocks.size());
             System.out.println(blocksNum);
             if(  blocks.size()== blocksNum ) {
                 System.out.println("set is full so replace ");
@@ -45,23 +47,26 @@ public class Set {
         {
             case "data" :
                 Cache.dataStatistics.increaseReplaceNum();
-//                Cache.dataStatistics.increaseCopiesBack(Cache.BaseInfo.blockSize/4);
                 break;
             case "instruction" :
                 switch (Cache.BaseInfo.architecture.toString()) {
                     case "harvard" :
                         ICache.instructionStatistics.increaseReplaceNum();
-//                        ICache.instructionStatistics.increaseCopiesBack(ICache.BaseInfo.blockSize/4);
                         break;
                     case "vonNeumann":
                         Cache.getiStatistics().increaseReplaceNum();
-//                        Cache.getiStatistics().increaseCopiesBack(Cache.BaseInfo.blockSize/4);
                         break;
-
                 }
 
         }
-        block.setDirtyBit(1);
+//        System.out.println(Cache.BaseInfo.writePolicy.toString());
+//        System.out.println(Cache.BaseInfo.allocationPolicy.toString());
+        if(Cache.BaseInfo.writePolicy.toString().equals("writeBack") && Cache.BaseInfo.allocationPolicy.toString().equals("allocate")){
+//            System.out.println("gooooooooooooooooooooooo999999999999999999999999");
+            if(block.getDirtyBit()==1) {
+                Cache.dataStatistics.increaseCopiesBack(Cache.BaseInfo.blockSize / 4);
+            }
+        }
         blocks.removeLast();
         addBlock(block);
     }
