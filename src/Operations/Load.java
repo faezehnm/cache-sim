@@ -18,7 +18,6 @@ public class Load {
             Cache.dataStatistics.increaseHit();
             Block toUpdate =  Cache.dSets.get(new Address(address).getSet()).findBlock(new Address(address).getTag());
             Cache.dSets.get(new Address(address).getSet()).updateBlockSituation(toUpdate);
-
         }
         else {
             Cache.dataStatistics.increaseMiss();

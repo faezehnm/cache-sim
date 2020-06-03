@@ -17,20 +17,12 @@ public class Set {
 
     public void addBlock(Block block )
     {
-//        System.out.print(" &&&& add block to set, " );
-//        System.out.println();
         if( !contain(block) ){
-//            System.out.print("doesn't contain before,  ");
-//            System.out.println("block size is : " + blocks.size());
-//            System.out.println(blocksNum);
             if(  blocks.size()== blocksNum ) {
-//                System.out.println("set is full so replace ");
                 replaceBlock(block);
             }
             else {
-//                System.out.println("add successful");
                 blocks.addFirst(block);
-//                System.out.println(blocks.size());
             }
         }
     }
@@ -59,10 +51,7 @@ public class Set {
                 }
 
         }
-//        System.out.println(Cache.BaseInfo.writePolicy.toString());
-//        System.out.println(Cache.BaseInfo.allocationPolicy.toString());
-        if(Cache.BaseInfo.writePolicy.toString().equals("writeBack") && Cache.BaseInfo.allocationPolicy.toString().equals("allocate")){
-//            System.out.println("gooooooooooooooooooooooo999999999999999999999999");
+        if(Cache.BaseInfo.writePolicy.toString().equals("writeBack")){
             if(blocks.getLast().getDirtyBit()==1) {
                 Cache.dataStatistics.increaseCopiesBack(Cache.BaseInfo.blockSize / 4);
             }

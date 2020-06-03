@@ -6,13 +6,11 @@ import java.nio.ByteBuffer;
 public class Address {
 
     long block ;
-    long tagBitNum ;
     String tag ="";
     long set ;
     int decimal;
     String address;
     String bytes ;
-    int tagg;
 
     public Address(String str)
     {
@@ -24,27 +22,19 @@ public class Address {
 
         bytes = Integer.toBinaryString(decimal);
 
-        int toAdd = 8 - str.length();
-//        System.out.println("fun" +toAdd);
-        for (int i =0 ; i<toAdd ; i++){
-            tag+="00000";
-        }
 
-
-        for (int i = 0; i < bytes.length() - Cache.BaseInfo.bitSet - Cache.BaseInfo.bitDOffset; i++) {
-//            for (int i = 0; i < bytes.length() - Cache.BaseInfo.bitSet ; i++) {
-
+        for (int i = 0; i < bytes.length() - Cache.BaseInfo.bitSet - Cache.BaseInfo.bitDOffset; i++)
                 tag += bytes.charAt(i);
-        }
 
-//        tagg= decimal/Cache.BaseInfo.blockSize;
     }
 
-    public String getTag() {
+    public String getTag()
+    {
         return tag;
     }
 
-    public long getSet() {
+    public long getSet()
+    {
         return set;
     }
 
@@ -57,6 +47,5 @@ public class Address {
         System.out.println("{");
         System.out.println("  decimal : "+ decimal +" ,to dived " +Cache.BaseInfo.blockSize +", block is " +decimal/(Cache.BaseInfo.blockSize) + " ,set num is :" +Cache.BaseInfo.setNum+" , set is :" + set);
         System.out.println("}");
-
     }
 }

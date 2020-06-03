@@ -37,14 +37,12 @@ public class CommandParser {
         String line = null ;
         while( !(line =scanner.nextLine()).isEmpty()){
             String[] arrOfStr = line.split("\\s+");
-//            System.out.println("in index " + arrOfStr[1]);
             if(arrOfStr[0].equals("2") && Cache.BaseInfo.architecture.toString().equals("harvard")){
                 iCache.fetchInstruction(arrOfStr[1]);
             }
             else
                 cache.doOrder(readState(Integer.valueOf(arrOfStr[0])), arrOfStr[1]);
         }
-
     }
 
     private static LoadStoreState readState(int state)
@@ -111,10 +109,8 @@ public class CommandParser {
         String[] arrOfStr = line.split(" - ");
         cache.dCacheSize = (Integer.valueOf(arrOfStr[0]));
         if( arrOfStr.length==2 ){
-//            iCache = (ICache)cache ;
             iCache.iCacheSize = (Integer.valueOf(arrOfStr[1]));
         }
-
     }
 
 }

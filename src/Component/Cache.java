@@ -61,14 +61,12 @@ public class Cache {
 
         public void increaseMiss()
         {
-//            System.out.println("miss");
             access++ ;
             misses ++ ;
         }
 
         public void increaseHit()
         {
-//            System.out.println("hit");
             access++ ;
             hits++ ;
         }
@@ -76,7 +74,6 @@ public class Cache {
         public void increaseReplaceNum()
         {
             replaceNum++;
-//            System.out.println("*************************");
         }
 
         public void increaseDemandFetch(int toAdd)
@@ -114,10 +111,8 @@ public class Cache {
             return hits;
         }
 
-        public String getMissRate()
+        private String getInFormat(Double valueRounded)
         {
-            calculateMissRate();
-            double valueRounded = Math.round(missRate * 10000D) / 10000D;
             String result = String.valueOf(valueRounded);
             String[] arr = result.split("\\.");
             if(arr[1].length()<4){
@@ -125,23 +120,21 @@ public class Cache {
                     result +="0" ;
                 }
             }
-
             return result;
         }
 
+        public String getMissRate()
+        {
+            calculateMissRate();
+            double valueRounded = Math.round(missRate * 10000D) / 10000D;
+            return getInFormat(valueRounded);
+        }
 
         public String getHitRate()
         {
             calculateHitRate();
             double valueRounded = Math.round(hitRate * 10000D) / 10000D;
-            String result = String.valueOf(valueRounded);
-            String[] arr = result.split("\\.");
-            if(arr[1].length()<4){
-                for( int i=0 ; i< 4-arr[1].length() ; i++){
-                    result +="0" ;
-                }
-            }
-            return result;
+            return getInFormat(valueRounded);
         }
 
         public long getReplaceNum()
@@ -163,7 +156,6 @@ public class Cache {
     public void buildCache()
     {
         dSets = new HashMap<>();
-//        System.out.println(dCacheSize/BaseInfo.blockSize/BaseInfo.associativity);
         for( long  i=0 ; i< BaseInfo.setNum ; i++){
             dSets.put(i ,new Set()) ;
         }
@@ -171,17 +163,10 @@ public class Cache {
         dataStatistics.initial();
         iStatistics = new Statistics();
         iStatistics.initial();
-
-//        System.out.println(dSets.size());
-//        for (int i=0 ; i<dSets.size() ; i++){
-//            System.out.println(dSets.get(i).getBlocks().size());
-//        }
-
     }
 
     public void doOrder(LoadStoreState state , String address)
     {
-//        System.out.println(state.toString());
         switch (state.toString()){
             case "dataLoad" :
                 Load.loadData(address);
@@ -193,22 +178,18 @@ public class Cache {
                 Load.loadInstruction(address);
                 break;
         }
-
     }
-
 
     public void cleanUpCache()
     {
         for (Map.Entry<Long, Set> entry : dSets.entrySet()) {
             for( Block block : entry.getValue().getBlocks() ){
                 if( block.getDirtyBit()==1 ){
-//                    System.out.println("jppppppppppppppp");
                     Cache.dataStatistics.increaseCopiesBack(Cache.BaseInfo.blockSize / 4);
                 }
             }
         }
     }
-
 
     public static Statistics getiStatistics()
     {

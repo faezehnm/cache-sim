@@ -39,11 +39,8 @@ public class Store {
 
         protected static void WBvsWA(String address)
         {
-
             if( CacheManager.isInCache(address , Cache.dSets)) {
-//                System.out.println("**");
                 Cache.dataStatistics.increaseHit();
-//                CacheManager.setDirtyBlock(address , Cache.dSets , DataOrInstruction.data);
             }
             else{
                 Cache.dataStatistics.increaseMiss();
@@ -51,7 +48,6 @@ public class Store {
                 Cache.dataStatistics.increaseDemandFetch(Cache.BaseInfo.blockSize/4);
             }
             CacheManager.setDirtyBlock(address , Cache.dSets , DataOrInstruction.data);
-
         }
 
         protected static void WBvsWN(String address)
