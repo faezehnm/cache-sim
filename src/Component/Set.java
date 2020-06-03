@@ -22,13 +22,13 @@ public class Set {
         if( !contain(block) ){
 //            System.out.print("doesn't contain before,  ");
 //            System.out.println("block size is : " + blocks.size());
-            System.out.println(blocksNum);
+//            System.out.println(blocksNum);
             if(  blocks.size()== blocksNum ) {
-                System.out.println("set is full so replace ");
+//                System.out.println("set is full so replace ");
                 replaceBlock(block);
             }
             else {
-                System.out.println("add successful");
+//                System.out.println("add successful");
                 blocks.addFirst(block);
 //                System.out.println(blocks.size());
             }

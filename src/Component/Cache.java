@@ -61,14 +61,14 @@ public class Cache {
 
         public void increaseMiss()
         {
-            System.out.println("miss");
+//            System.out.println("miss");
             access++ ;
             misses ++ ;
         }
 
         public void increaseHit()
         {
-            System.out.println("hit");
+//            System.out.println("hit");
             access++ ;
             hits++ ;
         }
@@ -76,7 +76,7 @@ public class Cache {
         public void increaseReplaceNum()
         {
             replaceNum++;
-            System.out.println("*************************");
+//            System.out.println("*************************");
         }
 
         public void increaseDemandFetch(int toAdd)
@@ -114,21 +114,34 @@ public class Cache {
             return hits;
         }
 
-
-        //TODO : set 4 digit after dot
-        public double getMissRate()
+        public String getMissRate()
         {
             calculateMissRate();
             double valueRounded = Math.round(missRate * 10000D) / 10000D;
-            return valueRounded;
+            String result = String.valueOf(valueRounded);
+            String[] arr = result.split("\\.");
+            if(arr[1].length()<4){
+                for( int i=0 ; i< 4-arr[1].length() ; i++){
+                    result +="0" ;
+                }
+            }
+
+            return result;
         }
 
-        //TODO : set 4 digit after dot
-        public double getHitRate()
+
+        public String getHitRate()
         {
             calculateHitRate();
             double valueRounded = Math.round(hitRate * 10000D) / 10000D;
-            return valueRounded;
+            String result = String.valueOf(valueRounded);
+            String[] arr = result.split("\\.");
+            if(arr[1].length()<4){
+                for( int i=0 ; i< 4-arr[1].length() ; i++){
+                    result +="0" ;
+                }
+            }
+            return result;
         }
 
         public long getReplaceNum()
@@ -146,7 +159,6 @@ public class Cache {
             return copiesBack;
         }
     }
-
 
     public void buildCache()
     {
@@ -190,7 +202,7 @@ public class Cache {
         for (Map.Entry<Long, Set> entry : dSets.entrySet()) {
             for( Block block : entry.getValue().getBlocks() ){
                 if( block.getDirtyBit()==1 ){
-                    System.out.println("jppppppppppppppp");
+//                    System.out.println("jppppppppppppppp");
                     Cache.dataStatistics.increaseCopiesBack(Cache.BaseInfo.blockSize / 4);
                 }
             }

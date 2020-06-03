@@ -25,7 +25,7 @@ public class ICache extends Cache {
 
     public void fetchInstruction(String address)
     {
-        System.out.println("instructionLoad");
+//        System.out.println("instructionLoad");
         if( CacheManager.isInCache(address , iSets))
             instructionStatistics.increaseHit();
         else {

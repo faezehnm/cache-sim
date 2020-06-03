@@ -37,7 +37,7 @@ public class CommandParser {
         String line = null ;
         while( !(line =scanner.nextLine()).isEmpty()){
             String[] arrOfStr = line.split("\\s+");
-            System.out.println("in index " + arrOfStr[1]);
+//            System.out.println("in index " + arrOfStr[1]);
             if(arrOfStr[0].equals("2") && Cache.BaseInfo.architecture.toString().equals("harvard")){
                 iCache.fetchInstruction(arrOfStr[1]);
             }

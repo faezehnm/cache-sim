@@ -31,7 +31,7 @@ public class CacheManager {
     {
         Address current = new Address(address) ;
 //        current.print();
-        System.out.print("in " +address + " with tag: " + current.getTag() +" in index : " + current.getSet());
+//        System.out.print("in " +address + " with tag: " + current.getTag() +" in index : " + current.getSet());
         if( set.get(current.getSet()).getBlocks().size()!=0) {
 //            System.out.println(" ::::: set size" + Cache.dSets.get(current.getSet()).getBlocks().size());
 //            System.out.println(Cache.dSets.get(current.getSet()).getBlocks().get(0));

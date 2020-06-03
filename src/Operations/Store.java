@@ -40,7 +40,6 @@ public class Store {
         protected static void WBvsWA(String address)
         {
 
-
             if( CacheManager.isInCache(address , Cache.dSets)) {
 //                System.out.println("**");
                 Cache.dataStatistics.increaseHit();
