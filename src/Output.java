@@ -37,7 +37,7 @@ public class Output {
         }
         else if ( cache instanceof Cache ){
             System.out.println("Unified I- D-cache");
-            System.out.println("Size : " + cache.dCacheSize);
+            System.out.println("Size: " + cache.dCacheSize);
         }
     }
 

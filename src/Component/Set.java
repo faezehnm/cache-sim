@@ -63,7 +63,7 @@ public class Set {
 //        System.out.println(Cache.BaseInfo.allocationPolicy.toString());
         if(Cache.BaseInfo.writePolicy.toString().equals("writeBack") && Cache.BaseInfo.allocationPolicy.toString().equals("allocate")){
 //            System.out.println("gooooooooooooooooooooooo999999999999999999999999");
-            if(block.getDirtyBit()==1) {
+            if(blocks.getLast().getDirtyBit()==1) {
                 Cache.dataStatistics.increaseCopiesBack(Cache.BaseInfo.blockSize / 4);
             }
         }
