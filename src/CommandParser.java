@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CommandParser {
-    private static ArrayList<LoadStoreState> loadStoreStates;
     private static Cache cache ;
     private static ICache iCache;
 

@@ -1,16 +1,15 @@
 package Operations;
 import Component.Cache;
-
 import java.nio.ByteBuffer;
 
 public class Address {
 
-    long block ;
-    String tag ="";
-    long set ;
-    int decimal;
-    String address;
-    String bytes ;
+    private long block ;
+    private String tag ="";
+    private long set ;
+    private int decimal;
+    private String address;
+    private String bytes ;
 
     public Address(String str)
     {

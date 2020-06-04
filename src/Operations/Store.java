@@ -4,7 +4,6 @@ import Component.Block;
 import Component.Cache;
 import Enums.ArchitectureType;
 import Enums.DataOrInstruction;
-
 import java.util.Map;
 
 public class Store {
@@ -16,7 +15,7 @@ public class Store {
             Cache.dataStatistics.increaseCopiesBack(1);
             if( CacheManager.isInCache(address ,Cache.dSets)){
                 Cache.dataStatistics.increaseHit();
-                CacheManager.writeBlockInCache(address,Cache.dSets, DataOrInstruction.data);
+                CacheManager.updateBlockState(address,Cache.dSets);
             }
             else{
                 Cache.dataStatistics.increaseMiss();
@@ -30,7 +29,7 @@ public class Store {
             Cache.dataStatistics.increaseCopiesBack(1);
             if( CacheManager.isInCache(address , Cache.dSets)){
                 Cache.dataStatistics.increaseHit();
-                CacheManager.writeBlockInCache(address , Cache.dSets, DataOrInstruction.data);
+                CacheManager.updateBlockState(address,Cache.dSets);
             }
             else{
                 Cache.dataStatistics.increaseMiss();
@@ -41,6 +40,7 @@ public class Store {
         {
             if( CacheManager.isInCache(address , Cache.dSets)) {
                 Cache.dataStatistics.increaseHit();
+                CacheManager.updateBlockState(address,Cache.dSets);
             }
             else{
                 Cache.dataStatistics.increaseMiss();
@@ -54,6 +54,7 @@ public class Store {
         {
             if( CacheManager.isInCache(address , Cache.dSets)) {
                 Cache.dataStatistics.increaseHit();
+                CacheManager.updateBlockState(address,Cache.dSets);
                 CacheManager.setDirtyBlock(address , Cache.dSets , DataOrInstruction.data);
             }
             else{

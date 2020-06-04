@@ -39,5 +39,11 @@ public class CacheManager {
         return false;
     }
 
+    public static void updateBlockState(String address , HashMap<Long , Set> set )
+    {
+        Block toUpdate =  set.get(new Address(address).getSet()).findBlock(new Address(address).getTag());
+        set.get(new Address(address).getSet()).updateBlockSituation(toUpdate);
+
+    }
 
 }

@@ -5,20 +5,13 @@ import Enums.ArchitectureType;
 import Enums.DataOrInstruction;
 
 public class Load {
-    private Cache cache ;
-
-    public Load(Cache cache)
-    {
-        this.cache = cache ;
-    }
 
     public static void loadData(String address)
     {
         if( CacheManager.isInCache(address , Cache.dSets)) {
             Cache.dataStatistics.increaseHit();
-            Block toUpdate =  Cache.dSets.get(new Address(address).getSet()).findBlock(new Address(address).getTag());
-            Cache.dSets.get(new Address(address).getSet()).updateBlockSituation(toUpdate);
-        }
+            CacheManager.updateBlockState(address,Cache.dSets);
+            }
         else {
             Cache.dataStatistics.increaseMiss();
             CacheManager.writeBlockInCache(address,Cache.dSets, DataOrInstruction.data);
@@ -30,8 +23,7 @@ public class Load {
     {
         if( CacheManager.isInCache(address , Cache.dSets)) {
             Cache.getiStatistics().increaseHit();
-            Block toUpdate =  Cache.dSets.get(new Address(address).getSet()).findBlock(new Address(address).getTag());
-            Cache.dSets.get(new Address(address).getSet()).updateBlockSituation(toUpdate);
+            CacheManager.updateBlockState(address,Cache.dSets);
         }
         else {
             Cache.getiStatistics().increaseMiss();
