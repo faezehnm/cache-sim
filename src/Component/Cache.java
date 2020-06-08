@@ -14,7 +14,6 @@ public class Cache {
     private static Statistics iStatistics;
     public static HashMap<Long ,Set> dSets ;
     public static int dCacheSize ;
-    public static boolean isCurrentAddressIn ;
 
     public static class BaseInfo
     {
@@ -93,7 +92,13 @@ public class Cache {
 
         public void calculateHitRate()
         {
-            hitRate =(float) hits/access ;
+            System.out.println("{");
+            System.out.println("in size : " + Cache.dCacheSize);
+            System.out.println("hits: " +hits);
+            System.out.println("access: " + access);
+            System.out.println("}");
+            hitRate = (float)hits/access ;
+//            System.out.println("hit rate : " + hitRate);
         }
 
         public long getAccess()
@@ -123,6 +128,20 @@ public class Cache {
             return result;
         }
 
+        public double getMissRateD()
+        {
+            calculateMissRate();
+            double valueRounded = Math.round(missRate * 10000D) / 10000D;
+            return valueRounded;
+        }
+
+        public double getHitRateD()
+        {
+            calculateHitRate();
+            double valueRounded = Math.round(hitRate * 10000D) / 10000D;
+            return valueRounded;
+        }
+
         public String getMissRate()
         {
             calculateMissRate();
@@ -136,6 +155,7 @@ public class Cache {
             double valueRounded = Math.round(hitRate * 10000D) / 10000D;
             return getInFormat(valueRounded);
         }
+
 
         public long getReplaceNum()
         {

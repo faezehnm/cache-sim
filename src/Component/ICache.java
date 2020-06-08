@@ -25,8 +25,10 @@ public class ICache extends Cache {
 
     public void fetchInstruction(String address)
     {
-        if( CacheManager.isInCache(address , iSets))
+        if( CacheManager.isInCache(address , iSets)) {
             instructionStatistics.increaseHit();
+            CacheManager.updateBlockState(address, iSets);
+        }
         else {
             instructionStatistics.increaseMiss();
             CacheManager.writeBlockInCache(address,iSets, DataOrInstruction.instruction);

@@ -53,6 +53,7 @@ public class Set {
         }
         if(Cache.BaseInfo.writePolicy.toString().equals("writeBack")){
             if(blocks.getLast().getDirtyBit()==1) {
+//                System.out.println("lala");
                 Cache.dataStatistics.increaseCopiesBack(Cache.BaseInfo.blockSize / 4);
             }
         }
